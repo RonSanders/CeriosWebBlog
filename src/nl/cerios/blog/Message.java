@@ -1,5 +1,5 @@
 package nl.cerios.blog;
-import java.sql.Date;
+import java.util.Date;
 
 public class Message {
 	private String 	title;

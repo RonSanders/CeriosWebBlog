@@ -1,6 +1,6 @@
 package nl.cerios.blog;
 
-public class UserRequest {
+public class NewUserRequest {
 	private String username;
 	private String password;
 	private String password2;

@@ -15,7 +15,7 @@ import java.util.Properties;
  *         INSERT > https://www.youtube.com/watch?v=0EZlo8hForo
  */
 
-public class DatabaseManager {
+public class DatabaseManager {/*
 	public static void main(String... arg) throws Exception {
 		User newUser = new User(); 
 		Message newMessage = new Message();
@@ -105,7 +105,7 @@ public class ConnectionDatabase{
 	 *         for (int i = 0; i < kolomNames.length; i++ ) { String kolomName =
 	 *         kolomNames[i]; temp += kolomNames+" varchar(255),";}
 	 */
-
+/*
 	public static void createTable(String tableName, String... kolomNames) throws Exception {
 		try {
 			String temp = "";
@@ -142,27 +142,46 @@ public class ConnectionDatabase{
 		}
 		return null;
 	}
-	
+	*/
 	
 	
 	
 	// sudo code
-	static User getUser(UserIdentificationRequest uir){
+	public static User getUser(UserIdentificationRequest uir){
 		// find the matching user on the DB and reconstruct a user object.
 		
 		User user = new User();
+		user.setUsername(uir.getUsername());
+		
 		return user;
 	}
-	static List<Message> getAllMessages(){
+	public static List<Message> getAllMessages(){
 		// reconstruct all the message values to a message object and add it to a list
-		List<Message> messageList = new ArrayList<Message>();
+		List<Message> messages = new ArrayList<Message>();
 		
-		return messageList;
+		Message m = new Message();
+		m.setTitle("title");
+		m.setBody("Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n"
+				+ " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,\n"
+				+ " when an unknown printer took a galley of type and scrambled it to make a type specimen book.\n"
+				+ " It has survived not only five centuries, but also the leap into electronic typesetting, \n"
+				+ "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset\n"
+				+ " sheets containing Lorem Ipsum passages, and more recently with desktop publishing software \n"
+				+ "like Aldus PageMaker including versions of Lorem Ipsum.\n");
+		messages.add(m);
+		messages.add(m);
+		messages.add(m);
+		
+		return messages;
 	}
-	static void newUser(User newUser){
+	public static User newUser(NewUserRequest userRequest){
 		// Add newUser to the table of users
+		User user = new User();
+		user.setUsername(userRequest.getUsername());
+		
+		return user;
 	}
-	static void newMessage(Message newMessage){
+	public static void newMessage(Message newMessage){
 		// Add newMessage to the table of messages
 	}
 }

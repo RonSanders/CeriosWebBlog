@@ -1,5 +1,6 @@
 package nl.cerios.blog;
-
+import java.util.Date;
+import java.util.List;
 import nl.cerios.blog.UserInterfaceManager.CurrentScreen;
 
 /**
@@ -25,8 +26,6 @@ import nl.cerios.blog.UserInterfaceManager.CurrentScreen;
 //	-Other option, add a value to the enum
 //		that indicates the status.
 //
-//	-Upload this code to a new git project.
-//
 //	-Guest should be the same as a normal
 //		user but restricted if no one is 
 //		logged in.
@@ -41,7 +40,7 @@ import nl.cerios.blog.UserInterfaceManager.CurrentScreen;
 //
 //	-Order the read posts list buy date.
 //
-//	-Show he user an option to show all titles
+//	-Show the user an option to show all titles
 //		up to a certain date. Think of :
 //		"today, this week, this month"
 //
@@ -52,7 +51,7 @@ public class UserInterfaces {
 				"Welcome to Cerios blog!\n"+
 				"1) Sign in?\n"+
 				"2) Sign up?\n"+
-				"3) Be a guest?\n"+
+				"3) Continue as guest?\n"+
 				"Type a number");
 		switch(index){
 		case 1 :
@@ -69,18 +68,18 @@ public class UserInterfaces {
 		}
 	}
 	
-	public static void showScreen_BlogNavigation(){
+	public static void showScreen_BlogNavigation(String name){
 		int index = Input.intInput(
-				"Welcome <User Name Here>!\n"+ 
+				"Welcome "+name+"!\n"+ 
 				"1) Do you want to write a new post?\n"+
 				"2) Do you want to read the blog posts?\n"+
 				"3) Do you want to signout?\n");
 		switch(index){
 		case 1 :
-			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_NEW_POST);
+			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_NEW_MESSAGES);
 			break;
 		case 2 :
-			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_READ_POSTS);
+			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_GET_ALL_MESSAGES);
 			break;
 		case 3 :
 			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_OUT);
@@ -97,7 +96,7 @@ public class UserInterfaces {
 				"2) Do you want to sign out?");
 		switch(index){
 		case 1 :
-			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_READ_POSTS);
+			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_GET_ALL_MESSAGES);
 			break;
 		case 2 :
 			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_OUT);
@@ -155,9 +154,9 @@ public class UserInterfaces {
 	//		Sign up
 	//
 	////////////////////
-	public static UserRequest showScreen_SignUp(){
+	public static NewUserRequest showScreen_SignUp(){
 		// show some text and call a function that creates the new user.
-		UserRequest ur = new UserRequest();
+		NewUserRequest ur = new NewUserRequest();
 		ur.setUsername(Input.stringInput("Enter your username here:"));
 		ur.setPassword(Input.stringInput("Enter your password here:"));
 		ur.setPassword2(Input.stringInput("Enter your password again here:"));
@@ -177,12 +176,24 @@ public class UserInterfaces {
 	//		post
 	//
 	////////////////////
-	public static void showScreen_NewPost(){
-		Debug.log("New post.");
+	
+	public static Message showScreen_NewMessage(){
+		Message message = new Message();
+		message.setTitle(Input.stringInput("Enter your Title:"));
+		message.setBody(Input.stringInput("Enter your text:"));
+		message.setDate(new Date());
 		
+		return message;
 	}
-	public static void showScreen_ReadPosts(){
-		Debug.log("Read post.");
+	
+	
+	public static void showScreen_ShowMessages(List<Message> messages){
+		for (Message message : messages) {
+			System.out.println(message.getTitle());
+			System.out.println(message.getBody());
+			System.out.println();
+		}
 		
+		UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
 	}
 }

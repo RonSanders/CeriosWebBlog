@@ -14,8 +14,9 @@ public class UserInterfaceManager {
 		SHOW_SCREEN_SIGN_UP, 
 		SHOW_SCREEN_SIGN_UP_CORRECT, 
 		SHOW_SCREEN_SIGN_UP_NOT_CORRECT,
-		SHOW_SCREEN_NEW_POST,
-		SHOW_SCREEN_READ_POSTS
+		SHOW_SCREEN_NEW_MESSAGES,
+		SHOW_SCREEN_SHOW_MESSAGES,
+		SHOW_SCREEN_GET_ALL_MESSAGES
 	}
 	
 	private static CurrentScreen currentScreen = CurrentScreen.SHOW_SCREEN_WELCOME;
@@ -31,7 +32,7 @@ public class UserInterfaceManager {
 				UserInterfaces.showScreen_Welcome();
 				break;
 			case SHOW_SCREEN_BLOG_NAVIGATION :
-				UserInterfaces.showScreen_BlogNavigation();
+				UserInterfaces.showScreen_BlogNavigation(LogicManager.getCurrentLoggedinUserName());
 				break;
 			case SHOW_SCREEN_GUIST :
 				UserInterfaces.showScreen_Guest();
@@ -67,11 +68,11 @@ public class UserInterfaceManager {
 				UserInterfaces.showScreen_SignUp_NotCorrect();
 				break;
 	
-			case SHOW_SCREEN_NEW_POST :
-				UserInterfaces.showScreen_NewPost();
+			case SHOW_SCREEN_NEW_MESSAGES :
+				LogicManager.AddNewMessage(UserInterfaces.showScreen_NewMessage());
 				break;
-			case SHOW_SCREEN_READ_POSTS :
-				UserInterfaces.showScreen_ReadPosts();
+			case SHOW_SCREEN_GET_ALL_MESSAGES :
+				UserInterfaces.showScreen_ShowMessages(LogicManager.getAllMessages());
 				break;
 			default:
 				UserInterfaces.showScreen_Welcome();
