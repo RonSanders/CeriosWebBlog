@@ -1,11 +1,13 @@
 package nl.cerios.blog;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Rutger van Velzen, Ron Sanders and Marcel Groothuis
@@ -36,13 +38,39 @@ public class DatabaseManager {
 			System.out.println("Insert Completed.");
 		}
 	}
+public class ConnectionDatabase{
+	//Normally a Main
+	Connection myConn = null;
+	Statement myStmt = null;
+	ResultSet myRs = null;
+	
+	try {
+		//1. Load the propeties file
+		Properties props = new Properties();
+		props.load(new FileInputStream("config.properties"));
+		
+		//2. Read the props
+		String theUser = props.getProperty("user");
+		String thePassword = props.getProperty("password");
+		String theDburl = props.getProperty("dburl");
+		
+		System.out.println("Connecting to database...");
+		System.out.println("Database URL: " + theDburl);
+		System.out.println("User: " + theUser);
+		
+		//3. Get a connection to database
+		myConn = DriverManager.getConnection(theDburl, theUser, thePassword);
+		
+		System.out.println("\nConnection successful!\n");		
+	}
+}
 
 	public static void bericht(Message newMessage) throws Exception { 
 		try {
 			Connection con = getConnection();
 			PreparedStatement posted = con
 					.prepareStatement("INSERT INTO messages (title, body, date) VALUES " + "('" + newMessage.getTitle()
-							+ "'," + "'" + newMessage.getBody() + "'," + "'" + newMessage.getDateTime() + "')");
+							+ "'," + "'" + newMessage.getBody() + "')");
 			posted.executeUpdate(); 
 		} catch (Exception e) {
 			System.out.println("DBM > bericht(Insert): " + e);
@@ -102,8 +130,8 @@ public class DatabaseManager {
 		try {
 			String driver = "com.mysql.jdbc.Driver";
 			String url = "jdbc:mysql://localhost:3306/test";
-			String username = "";
-			String password = "";
+			String userAccounts_User = "";
+			String userAccounts_Password = "";
 			Class.forName(driver);
 
 			Connection conn = DriverManager.getConnection(url, username, password);
