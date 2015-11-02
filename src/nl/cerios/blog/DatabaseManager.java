@@ -142,4 +142,27 @@ public class ConnectionDatabase{
 		}
 		return null;
 	}
+	
+	
+	
+	
+	// sudo code
+	static User getUser(UserIdentificationRequest uir){
+		// find the matching user on the DB and reconstruct a user object.
+		
+		User user = new User();
+		return user;
+	}
+	static List<Message> getAllMessages(){
+		// reconstruct all the message values to a message object and add it to a list
+		List<Message> messageList = new ArrayList<Message>();
+		
+		return messageList;
+	}
+	static void newUser(User newUser){
+		// Add newUser to the table of users
+	}
+	static void newMessage(Message newMessage){
+		// Add newMessage to the table of messages
+	}
 }
