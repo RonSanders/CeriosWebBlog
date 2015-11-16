@@ -1,6 +1,10 @@
 package nl.cerios.blog;
 import java.util.List;
 import nl.cerios.blog.UserInterfaceManager.CurrentScreen;
+import nl.cerios.blog.model.Message;
+import nl.cerios.blog.model.NewUserRequest;
+import nl.cerios.blog.model.User;
+import nl.cerios.blog.model.UserIdentificationRequest;
 
 public class LogicManager {
 	private static User currentLoggedinUser; // some thing like this should exist.

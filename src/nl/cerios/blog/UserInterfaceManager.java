@@ -4,7 +4,7 @@ public class UserInterfaceManager {
 	public enum CurrentScreen {
 		SHOW_SCREEN_WELCOME, 
 		SHOW_SCREEN_BLOG_NAVIGATION, 
-		SHOW_SCREEN_GUIST,
+		SHOW_SCREEN_GUEST,
 		SHOW_SCREEN_SIGN_IN, 
 		SHOW_SCREEN_SIGN_IN_CORRECT, 
 		SHOW_SCREEN_SIGN_IN_NOT_CORRECT, 
@@ -34,7 +34,7 @@ public class UserInterfaceManager {
 			case SHOW_SCREEN_BLOG_NAVIGATION :
 				UserInterfaces.showScreen_BlogNavigation(LogicManager.getCurrentLoggedinUserName());
 				break;
-			case SHOW_SCREEN_GUIST :
+			case SHOW_SCREEN_GUEST :
 				UserInterfaces.showScreen_Guest();
 				break;
 		

@@ -9,6 +9,9 @@ package nl.cerios.blog;
  */
 public class Main {
 	public static void main(String[] args) {
+		
+		
+	//	System.out.println('\u0000' + "<-woop");
 		LogicManager.start();
 	}
 }

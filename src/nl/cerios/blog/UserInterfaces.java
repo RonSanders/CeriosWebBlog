@@ -2,6 +2,9 @@ package nl.cerios.blog;
 import java.util.Date;
 import java.util.List;
 import nl.cerios.blog.UserInterfaceManager.CurrentScreen;
+import nl.cerios.blog.model.Message;
+import nl.cerios.blog.model.NewUserRequest;
+import nl.cerios.blog.model.UserIdentificationRequest;
 
 /**
  * <h1>UserInterfaces</h1>
@@ -61,7 +64,7 @@ public class UserInterfaces {
 			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP);
 			break;
 		case 3 :
-			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_GUIST);
+			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_GUEST);
 			break;
 		default:
 			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
@@ -102,7 +105,7 @@ public class UserInterfaces {
 			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_OUT);
 			break;
 		default:
-			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_GUIST);
+			UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_GUEST);
 		}
 	}
 	

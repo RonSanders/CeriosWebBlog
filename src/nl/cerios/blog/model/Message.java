@@ -1,4 +1,4 @@
-package nl.cerios.blog;
+package nl.cerios.blog.model;
 import java.util.Date;
 
 public class Message {

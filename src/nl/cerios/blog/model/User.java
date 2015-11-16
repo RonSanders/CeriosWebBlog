@@ -1,4 +1,4 @@
-package nl.cerios.blog;
+package nl.cerios.blog.model;
 
 public class User {
 	private String 	username;
