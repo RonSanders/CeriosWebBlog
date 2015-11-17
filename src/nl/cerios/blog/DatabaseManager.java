@@ -1,6 +1,7 @@
 package nl.cerios.blog;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,21 +22,23 @@ import nl.cerios.blog.model.UserIdentificationRequest;
  */
 
 public class DatabaseManager {
+	Connection con = null;
+	
 	public static void main(String... arg) throws Exception {
 		User newUser = new User(); 
 		Message newMessage = new Message();
 		createTable("users", "username", "password");
 		createTable("messages", "title", "body", "date", "username", "userID"); 
 		gebruiker(newUser);
-		bericht(newMessage);
+		//bericht(newMessage);
 		get();
 	}
 
 	public static void gebruiker(User newUser) throws Exception { 
 		try {
-			Connection con = getConnection();
+			Connection con = connectionDatabase();
 			PreparedStatement posted = con.prepareStatement("INSERT INTO users (username, password) VALUES " + "('"
-					+ newUser.getUsername() + "'," + "'" + newUser.getPassword() + "')");
+					+ "poep" + "'," + "'" + "poep1" + "')");
 			posted.executeUpdate(); 
 		} catch (Exception e) {
 			System.out.println("DBM > gebruiker(Insert): " + e);
@@ -43,15 +46,18 @@ public class DatabaseManager {
 			System.out.println("Insert Completed.");
 		}
 	}
-public class ConnectionDatabase{
+//public class ConnectionDatabase{
 	//Normally a Main
-	Connection myConn = null;
-	Statement myStmt = null;
-	ResultSet myRs = null;
+//	Connection myConn = null;
+//	Statement myStmt = null;
+//	ResultSet myRs = null;
 	
+	public static Connection connectionDatabase() throws FileNotFoundException, Exception{
 		//1. Load the propeties file
+		
 		Properties props = new Properties();
-		props.load(new FileInputStream("C:/Users/rsanders/git/CeriosBlog/First_Test_Application_2-9-2015/sql/config.properties.txt"));
+		props.load(new FileInputStream("C:/Users/rsanders/git/CeriosWebBlog/sql/config.properties.txt"));
+		String driver = "com.mysql.jdbc.Driver";
 		
 		//2. Read the props
 		String theUser = props.getProperty("user");
@@ -63,18 +69,20 @@ public class ConnectionDatabase{
 		System.out.println("User: " + theUser);
 		
 		//3. Get a connection to database
-		myConn = DriverManager.getConnection(theDburl, theUser, thePassword);
-		
-		System.out.println("\nConnection successful!\n");		
+		//myConn = DriverManager.getConnection(theDburl, theUser, thePassword);
+		Class.forName(driver);
+		Connection con = DriverManager.getConnection(theDburl, theUser, thePassword);
+		System.out.println("\nConnection successful!\n");	
+		return con;
 	}
-}
 
-	public static void bericht(Message newMessage) throws Exception { 
+
+/*	public static void bericht(Message newMessage) throws Exception { 
 		try {
-			Connection con = getConnection();
+			Connection con = connectionDatabase();
 			PreparedStatement posted = con
-					.prepareStatement("INSERT INTO messages (title, body, date) VALUES " + "('" + newMessage.getTitle()
-							+ "'," + "'" + newMessage.getBody() + "')");
+					.prepareStatement("INSERT INTO messages (title, body, date) VALUES " + "('" + "woop"
+							+ "'," + "'" + "woop" + "')");
 			posted.executeUpdate(); 
 		} catch (Exception e) {
 			System.out.println("DBM > bericht(Insert): " + e);
@@ -82,10 +90,10 @@ public class ConnectionDatabase{
 			System.out.println("Insert Completed.");
 		}
 	}
-
+*/
 	public static List<String> get() throws Exception {
 		try {
-			Connection con = getConnection();
+			Connection con = connectionDatabase();
 			PreparedStatement statement = con.prepareStatement("SELECT username,password FROM users"); 
 			ResultSet result = statement.executeQuery();
 			ArrayList<String> array = new ArrayList<String>();
@@ -109,14 +117,14 @@ public class ConnectionDatabase{
 	 *         for (int i = 0; i < kolomNames.length; i++ ) { String kolomName =
 	 *         kolomNames[i]; temp += kolomNames+" varchar(255),";}
 	 */
-/*
+
 	public static void createTable(String tableName, String... kolomNames) throws Exception {
 		try {
 			String temp = "";
 			for (String kolomName : kolomNames) {
 				temp += (kolomName + " varchar(255),");
 			}
-			Connection con = getConnection();
+			Connection con = connectionDatabase();
 			PreparedStatement create = con.prepareStatement("CREATE TABLE IF NOT EXISTS " + tableName
 					+ "(id int NOT NULL AUTO_INCREMENT, " + temp + "PRIMARY KEY(id))");
 			create.executeUpdate();
@@ -130,7 +138,7 @@ public class ConnectionDatabase{
 
 	}
 
-	public static Connection getConnection() throws Exception {
+	/*public static Connection getConnection() throws Exception {
 		try {
 			String driver = "com.mysql.jdbc.Driver";
 			String url = "jdbc:mysql://localhost:3306/test";
@@ -145,8 +153,8 @@ public class ConnectionDatabase{
 			System.out.println("DBM > Connection: " + e);
 		}
 		return null;
-	}
-	*/
+	}*/
+
 	
 	
 	
@@ -178,12 +186,12 @@ public class ConnectionDatabase{
 		
 		return messages;
 	}
-	public static User newUser(NewUserRequest userRequest){
+	public static User newUser(NewUserRequest userRequest) throws FileNotFoundException, Exception{
 		// Add newUser to the table of users
 		User user = new User();
 		user.setUsername(userRequest.getUsername());
 		user.setPassword(userRequest.getPassword());
-		Connection con = getConnection();
+		Connection con = connectionDatabase();
 		
 		
 		return user;
