@@ -13,7 +13,7 @@ public class LogicManager {
 		return currentLoggedinUser.getUsername();
 	}
 
-	public static void start(){
+	public static void main(String[] args) {
 		UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
 	}
 	
