@@ -56,7 +56,7 @@ public class DatabaseManager {
 		//1. Load the propeties file
 		
 		Properties props = new Properties();
-		props.load(new FileInputStream("C:/Users/rsanders/git/CeriosWebBlog/sql/config.properties.txt"));
+		props.load(new FileInputStream("C:/Users/rsanders/git/CeriosWebBlog/bin/config.properties.gitignore"));
 		String driver = "com.mysql.jdbc.Driver";
 		
 		//2. Read the props
