@@ -1,7 +1,6 @@
 package nl.cerios.blog;
 import java.util.List;
 import nl.cerios.blog.model.Message;
-import nl.cerios.blog.model.NewUserRequest;
 import nl.cerios.blog.model.User;
 import nl.cerios.blog.model.UserIdentificationRequest;
 
@@ -29,10 +28,10 @@ public class LogicManager {
 		// else do sign out no correct stuff
 	}
 	
-	public static void signUp(NewUserRequest newUserRequest){
+	public static void signUp(UserIdentificationRequest uir){
 		// Do sign up correct stuff
-		DatabaseManager.newUser(newUserRequest);
-		currentLoggedinUser = DatabaseManager.newUser(newUserRequest);
+		DatabaseManager.newUser(uir);
+		currentLoggedinUser = DatabaseManager.newUser(uir);
 		// or do sign up not correct stuff
 	}
 	

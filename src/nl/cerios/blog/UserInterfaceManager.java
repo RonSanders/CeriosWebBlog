@@ -231,15 +231,18 @@ public class UserInterfaceManager {
 	//
 	////////////////////
 	public static void showScreen_SignUp(){
-		NewUserRequest ur = new NewUserRequest();
-		ur.setUsername(Input.stringInput("Enter your username here:"));
+		UserIdentificationRequest uir = new UserIdentificationRequest();
+		uir.setUsername(Input.stringInput("Enter your username here:"));
 		
 		String tempSavePassword = Input.stringInput("Enter your password here:");
-		if(tempSavePassword.equals(Input.stringInput("Enter your password again here:")))
-			ur.setPassword(tempSavePassword);
-		else
+		
+		if(tempSavePassword.equals(Input.stringInput("Enter your password again here:"))){
+			uir.setPassword(tempSavePassword);
+			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_CORRECT);
+		}else{
 			System.out.println("Your password did not match!");
-		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
+			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_NOT_CORRECT);
+		}
 	}
 	public static void showScreen_SignUp_Correct(){
 		System.out.println("You are signed up!\n");
@@ -247,6 +250,7 @@ public class UserInterfaceManager {
 	}
 	public static void showScreen_SignUp_NotCorrect(){
 		System.out.println("Oops!\n We cant sign you up right now.\n");
+		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
 	}
 	
 	////////////////////
