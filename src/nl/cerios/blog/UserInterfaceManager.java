@@ -18,7 +18,7 @@ import nl.cerios.blog.model.UserIdentificationRequest;
  * @since	01-11-2015
  */
 
-//////////////////// To Do ////////////////////
+/*/////////////////// To Do ////////////////////
 //
 //	-Maybe Correct and not-correct should be 
 //		an status enum, that adds to the
@@ -46,7 +46,8 @@ import nl.cerios.blog.model.UserIdentificationRequest;
 //		up to a certain date. Think of :
 //		"today, this week, this month"
 //
-//////////////////////////////////////////////
+/////////////////////////////////////////////*/
+
 public class UserInterfaceManager {
 	public static void main(String[] args) {
 		UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
