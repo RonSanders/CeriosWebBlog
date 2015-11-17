@@ -233,7 +233,6 @@ public class UserInterfaceManager {
 	public static void showScreen_SignUp(){
 		UserIdentificationRequest uir = new UserIdentificationRequest();
 		uir.setUsername(Input.stringInput("Enter your username here:"));
-		
 		String tempSavePassword = Input.stringInput("Enter your password here:");
 		
 		if(tempSavePassword.equals(Input.stringInput("Enter your password again here:"))){
