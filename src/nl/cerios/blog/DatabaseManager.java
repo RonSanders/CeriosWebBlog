@@ -20,7 +20,7 @@ import nl.cerios.blog.model.UserIdentificationRequest;
  *         INSERT > https://www.youtube.com/watch?v=0EZlo8hForo
  */
 
-public class DatabaseManager {/*
+public class DatabaseManager {
 	public static void main(String... arg) throws Exception {
 		User newUser = new User(); 
 		Message newMessage = new Message();
@@ -49,10 +49,9 @@ public class ConnectionDatabase{
 	Statement myStmt = null;
 	ResultSet myRs = null;
 	
-	try {
 		//1. Load the propeties file
 		Properties props = new Properties();
-		props.load(new FileInputStream("config.properties"));
+		props.load(new FileInputStream("C:/Users/rsanders/git/CeriosBlog/First_Test_Application_2-9-2015/sql/config.properties.txt"));
 		
 		//2. Read the props
 		String theUser = props.getProperty("user");
@@ -183,6 +182,9 @@ public class ConnectionDatabase{
 		// Add newUser to the table of users
 		User user = new User();
 		user.setUsername(userRequest.getUsername());
+		user.setPassword(userRequest.getPassword());
+		Connection con = getConnection();
+		
 		
 		return user;
 	}
