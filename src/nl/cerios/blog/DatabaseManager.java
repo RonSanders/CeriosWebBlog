@@ -87,13 +87,13 @@ public class DatabaseManager {
 		Statement myStmt = null;
 		ResultSet myRs = null;*/
 		
-/*	public static void bericht(Message newMessage) throws Exception { 
+	public static void newMessage(Message message) throws Exception { 
 
 		try {
 			Connection con = connectionDatabase();
 			PreparedStatement posted = con
-					.prepareStatement("INSERT INTO messages (title, body, date) VALUES " + "('" + "woop"
-							+ "'," + "'" + "woop" + "')");
+					.prepareStatement("INSERT INTO messages (title, body, date) VALUES " + "('" + message.getTitle()
+							+ "'," + "'" + message.getBody() + "'," + "'" + message.getDate() + "')");
 			posted.executeUpdate(); 
 		} catch (Exception e) {
 			System.out.println("DBM > bericht(Insert): " + e);
@@ -101,32 +101,8 @@ public class DatabaseManager {
 			System.out.println("Insert Completed.");
 		}
 	}
-*/
+
 	
-/* Create tabel not in use!
-	public static void createTable(String tableName, String... kolomNames) throws Exception {
-
-		try {
-			String temp = "";
-			for (String kolomName : kolomNames) {
-				temp += (kolomName + " varchar(255),");
-				
-			//for (int i = 0; i < kolomNames.length; i++ ) { String kolomName =
-	        // 	kolomNames[i]; temp += kolomNames+" varchar(255),";}	
-			}
-			Connection con = connectionDatabase();
-			PreparedStatement create = con.prepareStatement("CREATE TABLE IF NOT EXISTS " + tableName
-					+ "(id int NOT NULL AUTO_INCREMENT, " + temp + "PRIMARY KEY(id))");
-			create.executeUpdate();
-		} catch (Exception e) {
-			System.out.println("DBM > Createtable: " + e);
-			e.printStackTrace();
-			throw e;
-		} finally {
-			System.out.println("Function Complete!");
-		}
-
-	}*/
 
 	/* sudo code 1
 	public static User getUser(UserIdentificationRequest uir){
@@ -168,9 +144,6 @@ public class DatabaseManager {
 		
 		return user;
 	}*/
-		
-	public static void newMessage(Message newMessage){
-		// Add newMessage to the table of messages
-	}
+	
 	
 }

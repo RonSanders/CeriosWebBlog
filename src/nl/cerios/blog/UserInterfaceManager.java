@@ -255,6 +255,7 @@ public class UserInterfaceManager {
 		message.setTitle(Input.stringInput("Enter your Title:"));
 		message.setBody(Input.stringInput("Enter your text:"));
 		message.setDate(new Date());
+		LogicManager.addNewMessage(message);
 	}
 	public static void showScreen_ShowMessages(List<Message> messages){
 		for (Message message : messages) {

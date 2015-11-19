@@ -15,7 +15,7 @@ public class LogicManager {
 	public static void signIn(UserIdentificationRequest uir){
 		// get the matching user out of the database 
 		// and store it local as the current user.
-	//	currentLoggedinUser = DatabaseManager.getUser(uir);
+		//currentLoggedinUser = DatabaseManager.getUser(uir);
 		// Do sign in correct stuff
 		Debug.log(currentLoggedinUser.getUsername());
 		// Or do sign in NOT correct stuff.
@@ -39,15 +39,17 @@ public class LogicManager {
 		}
 		
 		// or do sign up not correct stuff
-	}
-	
-	public static void AddNewMessage(Message newMessage){
-		DatabaseManager.newMessage(newMessage);
-	}
+	}	
 	
 	public static List<Message> getAllMessages(){
 		//List<Message> messages = DatabaseManager.getAllMessages();
 		List<Message> messages = new ArrayList<>();
 		return messages;
+	}
+	public static void addNewMessage(Message message) {
+		try{
+			DatabaseManager.newMessage(message);
+		}catch (Exception e){
+		}
 	}
 }
