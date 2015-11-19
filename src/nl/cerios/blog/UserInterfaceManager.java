@@ -46,10 +46,6 @@ import nl.cerios.blog.model.UserIdentificationRequest;
 //		"today, this week, this month"
 //
 /////////////////////////////////////////////*/
-<<<<<<< HEAD
-
-=======
->>>>>>> soom changes
 public class UserInterfaceManager {
 	public static void main(String[] args) {
 		UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
