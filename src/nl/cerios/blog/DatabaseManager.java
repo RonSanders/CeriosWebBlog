@@ -23,24 +23,13 @@ import nl.cerios.blog.model.UserIdentificationRequest;
 public class DatabaseManager {
 	Connection con = null;
 	
-	public static void main(String... arg) throws Exception {
-		
-		User newUser = new User(); 
-		Message newMessage = new Message();
-		addUser(newUser);		
-		get();
-	}
-/*		createTable("users", "username", "password");
-		//createTable("messages", "title", "body", "date", "username", "userID"); 
-		//bericht(newMessage);
-*/
 	
-	public static void addUser(User newUser) throws Exception { 
+	public static void addUser(UserIdentificationRequest newUser) throws Exception { 
 
 		try {
 			Connection con = connectionDatabase();
 			PreparedStatement posted = con.prepareStatement("INSERT INTO users (username, password) VALUES " + "('"
-					+ "poep" + "'," + "'" + "poep1" + "')");
+					+ newUser.getUsername() + "'," + "'" + newUser.getPassword() + "')");
 			posted.executeUpdate(); 
 		} catch (Exception e) {
 			System.out.println("DBM > gebruiker(Insert): " + e);
@@ -72,7 +61,7 @@ public class DatabaseManager {
 		return con;
 	}
 	
-	public static List<String> get() throws Exception {
+	public static List<String> getUser() throws Exception {
 		try {
 			Connection con = connectionDatabase();
 			PreparedStatement statement = con.prepareStatement("SELECT username,password FROM users"); 
