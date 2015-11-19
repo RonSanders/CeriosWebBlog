@@ -24,9 +24,10 @@ public class DatabaseManager {
 	Connection con = null;
 	
 	public static void main(String... arg) throws Exception {
+		
 		User newUser = new User(); 
 		Message newMessage = new Message();
-		gebruiker(newUser);		
+		addUser(newUser);		
 		get();
 	}
 /*		createTable("users", "username", "password");
@@ -34,7 +35,7 @@ public class DatabaseManager {
 		//bericht(newMessage);
 */
 	
-	public static void gebruiker(User newUser) throws Exception { 
+	public static void addUser(User newUser) throws Exception { 
 
 		try {
 			Connection con = connectionDatabase();
