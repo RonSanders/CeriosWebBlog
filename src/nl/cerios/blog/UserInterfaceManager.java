@@ -2,7 +2,6 @@ package nl.cerios.blog;
 import java.util.Date;
 import java.util.List;
 import nl.cerios.blog.model.Message;
-import nl.cerios.blog.model.NewUserRequest;
 import nl.cerios.blog.model.UserIdentificationRequest;
 
 /**
@@ -47,12 +46,14 @@ import nl.cerios.blog.model.UserIdentificationRequest;
 //		"today, this week, this month"
 //
 /////////////////////////////////////////////*/
+<<<<<<< HEAD
 
+=======
+>>>>>>> soom changes
 public class UserInterfaceManager {
 	public static void main(String[] args) {
 		UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
 	}
-	
 	public enum CurrentScreen {
 		SHOW_SCREEN_WELCOME, 
 		SHOW_SCREEN_BLOG_NAVIGATION, 
@@ -165,7 +166,6 @@ public class UserInterfaceManager {
 			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
 		}
 	}
-	
 	public static void showScreen_Guest(){ // must be one with showScreen_BlogNavigation, contend based on current user == null?
 		int index = Input.intInput(
 				"Welkom Guest\n"+
@@ -188,19 +188,16 @@ public class UserInterfaceManager {
 	//		Sign in
 	//
 	////////////////////
-	public static UserIdentificationRequest showScreen_SignIn(){
+	public static void showScreen_SignIn(){
 		UserIdentificationRequest uir = new UserIdentificationRequest();
 		uir.setUsername(Input.stringInput("Enter your userName."));
 		uir.setPassword(Input.stringInput("Enter your password."));
-		
-		return uir;
+
 	}
-	
 	public static void showScreen_SignIn_Correct(){
 		System.out.println("You are signed in!");
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
 	}
-	
 	public static void showScreen_SignIn_NotCorrect(){
 		System.out.println("You are NOT logged in!");
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
@@ -214,12 +211,10 @@ public class UserInterfaceManager {
 	public static boolean showScreen_SignOut(){
 		return Input.yes("Are You sure, you want to sign out?(y/n)");
 	}
-	
 	public static void showScreen_SignOut_Correct(){
 		System.out.println("You are signed out!\n Good Bye!\n");
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
 	}
-	
 	//showScreen_SignOut_NotCorrect
 	public static void showScreen_SignOut_NotCorrect(){
 		System.out.println("Oops!\n We cant sign you out right now.\n");
@@ -238,6 +233,7 @@ public class UserInterfaceManager {
 		
 		if(tempSavePassword.equals(Input.stringInput("Enter your password again here:"))){
 			uir.setPassword(tempSavePassword);
+			LogicManager.signUp(uir);
 			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_CORRECT);
 		}else{
 			System.out.println("Your password did not match!");
@@ -258,24 +254,18 @@ public class UserInterfaceManager {
 	//		post
 	//
 	////////////////////
-	
-	public static Message showScreen_NewMessage(){
+	public static void showScreen_NewMessage(){
 		Message message = new Message();
 		message.setTitle(Input.stringInput("Enter your Title:"));
 		message.setBody(Input.stringInput("Enter your text:"));
 		message.setDate(new Date());
-		
-		return message;
 	}
-	
-	
 	public static void showScreen_ShowMessages(List<Message> messages){
 		for (Message message : messages) {
 			System.out.println(message.getTitle());
 			System.out.println(message.getBody());
 			System.out.println();
 		}
-		
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
 	}
 }
