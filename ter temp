@@ -1,0 +1,32 @@
+* [33mc950f96[m[33m ([1;36mHEAD[m[33m, [1;32mtemp[m[33m)[m merge conflict fixed
+* [33ma57b3a5[m added new pull
+*   [33m344cd4a[m[33m ([1;31morigin/master[m[33m, [1;31morigin/HEAD[m[33m)[m Merge branch 'master' of https://github.com/FaustXVII/CeriosWebBlog
+[32m|[m[33m\[m  
+* [33m|[m [33mff35098[m DB
+[33m|[m [33m|[m * [33m3b3337c[m[33m ([1;32mmaster[m[33m)[m soom changes
+[33m|[m [33m|[m[33m/[m  
+[33m|[m * [33m63308ea[m new
+[33m|[m[33m/[m  
+* [33ma7c20d8[m some changes in logic and UI manager
+* [33m123f2e0[m changed some coppelings but no all!
+* [33m32d68c9[m johnny
+* [33m1687324[m databasemanager toegevoegd, met werkende user Tabel
+*   [33m7cc77d2[m Merge branch 'master' of https://github.com/FaustXVII/CeriosWebBlog
+[35m|[m[36m\[m  
+[35m|[m * [33ma8aa789[m main class is removed and the start method is now a special main.
+* [36m|[m [33m09bc3bb[m ddfdf
+[36m|[m[36m/[m  
+* [33mb916655[m new packages
+* [33m0efdbd5[m added some dummy code and added more option to the userinterface class
+* [33m2a3e32a[m Sudo code added to the DBManager
+* [33mf813345[m new DB manager
+* [33m241fad8[m deleted test
+* [33ma3c1e61[m TESSSSSSSSSST
+*   [33md59bb3d[m Merge branch 'master' of https://github.com/FaustXVII/CeriosWebBlog
+[1;31m|[m[1;32m\[m  
+[1;31m|[m * [33m5a06e5e[m Database manager added
+* [1;32m|[m [33m704f379[m hoera
+[1;32m|[m[1;32m/[m  
+* [33mff3c485[m bin added
+* [33mf1224e9[m new
+* [33m51a98c4[m Initial commit
