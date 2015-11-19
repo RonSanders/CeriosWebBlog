@@ -5,6 +5,7 @@ import nl.cerios.blog.model.User;
 import nl.cerios.blog.model.UserIdentificationRequest;
 
 public class LogicManager {
+	// test test test. This is a test! Ron can you see this????
 	private static User currentLoggedinUser; // some thing like this should exist.
 	
 	public static String getCurrentLoggedinUserName() {
