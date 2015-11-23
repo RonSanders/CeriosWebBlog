@@ -24,6 +24,7 @@ public class LogicManager {
 		try{
 			currentLoggedinUser = DatabaseManager.addUser(uir);
 		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	public static List<Message> getAllMessages(){
@@ -34,6 +35,7 @@ public class LogicManager {
 		try{
 			DatabaseManager.newMessage(message);
 		}catch (Exception e){
+			e.printStackTrace();
 		}
 	}
 }
