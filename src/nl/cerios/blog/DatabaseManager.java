@@ -1,17 +1,17 @@
 package nl.cerios.blog;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
-
 import nl.cerios.blog.model.Message;
 import nl.cerios.blog.model.User;
 import nl.cerios.blog.model.UserIdentificationRequest;
+
 
 /**
  * @author Rutger van Velzen, Ron Sanders and Marcel Groothuis
@@ -21,9 +21,7 @@ import nl.cerios.blog.model.UserIdentificationRequest;
 
 public class DatabaseManager {
 	Connection con = null;
-	
-	
-	public static void addUser(UserIdentificationRequest newUser) throws Exception { 
+	public static User addUser(UserIdentificationRequest newUser) throws Exception { 
 
 		try {
 			Connection con = connectionDatabase();
@@ -31,12 +29,13 @@ public class DatabaseManager {
 					+ newUser.getUsername() + "'," + "'" + newUser.getPassword() + "')");
 			posted.executeUpdate(); 
 		} catch (Exception e) {
-			System.out.println("DBM > gebruiker(Insert): " + e);
+			e.printStackTrace();
 		} finally {
 			System.out.println("Insert Completed.");
 		}
+		return getUser(newUser);
 	}
-	
+
 	public static Connection connectionDatabase() throws FileNotFoundException, Exception{
 		//1. Load the propeties file
 		Properties props = new Properties();
@@ -53,96 +52,51 @@ public class DatabaseManager {
 		System.out.println("User: " + theUser);
 		
 		//3. Get a connection to database
-		//myConn = DriverManager.getConnection(theDburl, theUser, thePassword);
 		Class.forName(driver);
 		Connection con = DriverManager.getConnection(theDburl, theUser, thePassword);
 		System.out.println("\nConnection successfull!\n");	
 		return con;
 	}
 	
-	public static List<String> getUser() throws Exception {
+	public static User getUser(UserIdentificationRequest uir) throws Exception {
 		try {
 			Connection con = connectionDatabase();
+			//where SQL commando 
+			//Query
 			PreparedStatement statement = con.prepareStatement("SELECT username,password FROM users"); 
 			ResultSet result = statement.executeQuery();
-			ArrayList<String> array = new ArrayList<String>();
-			while (result.next()) {
-				System.out.print(result.getString("username"));
-				System.out.print(" ");
-				System.out.println(result.getString("password"));
-				array.add(result.getString("username"));
+			
+			User u = new User();
+			
+			while (result.next()) { //niet meer nodig omdat je er 1 selecteert
+				String dbUsername = result.getString("username");
+				String dbPassword = result.getString("password");
+				System.out.print(dbUsername + " " + dbPassword);
+				if(uir.getUsername().equals(dbUsername) && uir.getPassword().equals(dbPassword)){
+					u.setUsername(dbUsername);
+					return u;
+				}
 			}
 			System.out.println("All records have been selected!");
-			return array;
+			return null;
 		} catch (Exception e) {
-			System.out.println("DBM > get(Select): " + e);
+			System.out.println("DBM > getUser(Select): ");
+			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
-	
-/*	public class ConnectionDatabase{
-		Normally a Main
-		Connection myConn = null;
-		Statement myStmt = null;
-		ResultSet myRs = null;*/
-		
 	public static void newMessage(Message message) throws Exception { 
-
 		try {
 			Connection con = connectionDatabase();
 			PreparedStatement posted = con
-					.prepareStatement("INSERT INTO messages (title, body, date) VALUES " + "('" + message.getTitle()
-							+ "'," + "'" + message.getBody() + "'," + "'" + message.getDate() + "')");
+					.prepareStatement("INSERT INTO messages (title, body) VALUES " + "('" + message.getTitle()
+							+ "'," + "'" + message.getBody() + "')");
 			posted.executeUpdate(); 
 		} catch (Exception e) {
-			System.out.println("DBM > bericht(Insert): " + e);
+			System.out.println("DBM > message(Insert): ");
+			e.printStackTrace();
 		} finally {
 			System.out.println("Insert Completed.");
 		}
 	}
-
-	
-
-	/* sudo code 1
-	public static User getUser(UserIdentificationRequest uir){
-		// find the matching user on the DB and reconstruct a user object.
-		
-		User user = new User();
-		user.setUsername(uir.getUsername());
-		
-		return user;
-	}*/
-	/* sudo code 2
-	public static List<Message> getAllMessages(){
-		// reconstruct all the message values to a message object and add it to a list
-		List<Message> messages = new ArrayList<Message>();
-		
-		Message m = new Message();
-		m.setTitle("title");
-		m.setBody("Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n"
-				+ "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,\n"
-				+ "when an unknown printer took a galley of type and scrambled it to make a type specimen book.\n"
-				+ "It has survived not only five centuries, but also the leap into electronic typesetting, \n"
-				+ "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset\n"
-				+ "sheets containing Lorem Ipsum passages, and more recently with desktop publishing software \n"
-				+ "like Aldus PageMaker including versions of Lorem Ipsum.\n");
-		messages.add(m);
-		messages.add(m);
-		messages.add(m);
-		
-		return messages;
-	}*/
-	/* sudo code 3
-	public static User newUser(UserIdentificationRequest userRequest) throws FileNotFoundException, Exception{
-		// Add newUser to the table of users
-		User user = new User();
-		user.setUsername(userRequest.getUsername());
-		user.setPassword(userRequest.getPassword());
-		Connection con = connectionDatabase();
-		
-		
-		return user;
-	}*/
-	
-	
 }

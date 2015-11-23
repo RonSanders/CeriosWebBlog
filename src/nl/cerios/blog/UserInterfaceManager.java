@@ -1,6 +1,7 @@
 package nl.cerios.blog;
 import java.util.Date;
 import java.util.List;
+import jdk.nashorn.internal.ir.CatchNode;
 import nl.cerios.blog.model.Message;
 import nl.cerios.blog.model.UserIdentificationRequest;
 
@@ -71,15 +72,17 @@ public class UserInterfaceManager {
 	public static CurrentScreen getCurrentScreen() {
 		return currentScreen;
 	}
-	public static void switchCurrentScreen(CurrentScreen currentScreen) {
+	public static void switchCurrentScreen(CurrentScreen currentScreen){
 		UserInterfaceManager.currentScreen = currentScreen;
 	
-		switch(getCurrentScreen()){
+		CurrentScreen keuze= getCurrentScreen();
+	
+		switch(keuze){
 			case SHOW_SCREEN_WELCOME :
 				showScreen_Welcome();
 				break;
 			case SHOW_SCREEN_BLOG_NAVIGATION :
-				showScreen_BlogNavigation(LogicManager.getCurrentLoggedinUserName());
+				showScreen_BlogNavigation();
 				break;
 			case SHOW_SCREEN_GUEST :
 				showScreen_Guest();
@@ -119,7 +122,7 @@ public class UserInterfaceManager {
 				showScreen_NewMessage();
 				break;
 			case SHOW_SCREEN_GET_ALL_MESSAGES :
-				showScreen_ShowMessages(LogicManager.getAllMessages());
+				showScreen_ShowMessages();
 				break;
 			default:
 				showScreen_Welcome();
@@ -142,7 +145,8 @@ public class UserInterfaceManager {
 			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
 		}
 	}
-	public static void showScreen_BlogNavigation(String name){
+	public static void showScreen_BlogNavigation(){
+		String name = LogicManager.getCurrentLoggedinUserName();
 		int index = Input.intInput(
 				"Welcome "+name+"!\n"+ 
 				"1) Do you want to write a new post?\n"+
@@ -257,7 +261,8 @@ public class UserInterfaceManager {
 		message.setDate(new Date());
 		LogicManager.addNewMessage(message);
 	}
-	public static void showScreen_ShowMessages(List<Message> messages){
+	public static void showScreen_ShowMessages(){
+		List<Message> messages = LogicManager.getAllMessages();
 		for (Message message : messages) {
 			System.out.println(message.getTitle());
 			System.out.println(message.getBody());
