@@ -1,6 +1,7 @@
 package nl.cerios.blog;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.lang.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -39,7 +40,7 @@ public class DatabaseManager {
 	public static Connection connectionDatabase() throws FileNotFoundException, Exception{
 		//1. Load the propeties file
 		Properties props = new Properties();
-		props.load(new FileInputStream("C:/Users/rsanders/git/CeriosWebBlog/bin/config.properties.gitignore"));
+		props.load(new FileInputStream("./config.properties.txt"));
 		String driver = "com.mysql.jdbc.Driver";
 		
 		//2. Read the props
