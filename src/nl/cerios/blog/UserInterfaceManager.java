@@ -129,7 +129,7 @@ public class UserInterfaceManager {
 		}
 	}
 	public static void showScreen_Welcome(){
-		int index = Input.intInput(
+		int index = KeyboardInputs.intInput(
 				"Welcome to Cerios blog!\n"+
 				"1) Sign in?\n"+
 				"2) Sign up?\n"+
@@ -147,7 +147,7 @@ public class UserInterfaceManager {
 	}
 	public static void showScreen_BlogNavigation(){
 		String name = LogicManager.getCurrentLoggedinUserName();
-		int index = Input.intInput(
+		int index = KeyboardInputs.intInput(
 				"Welcome "+name+"!\n"+ 
 				"1) Do you want to write a new post?\n"+
 				"2) Do you want to read the blog posts?\n"+
@@ -167,7 +167,7 @@ public class UserInterfaceManager {
 		}
 	}
 	public static void showScreen_Guest(){ // must be one with showScreen_BlogNavigation, contend based on current user == null?
-		int index = Input.intInput(
+		int index = KeyboardInputs.intInput(
 				"Welkom Guest\n"+
 				"1) Do you want to read all posts?\n"+
 				"2) Do you want to sign out?");
@@ -190,8 +190,8 @@ public class UserInterfaceManager {
 	////////////////////
 	public static void showScreen_SignIn(){
 		UserIdentificationRequest uir = new UserIdentificationRequest();
-		uir.setUsername(Input.stringInput("Enter your userName."));
-		uir.setPassword(Input.stringInput("Enter your password."));
+		uir.setUsername(KeyboardInputs.stringInput("Enter your userName."));
+		uir.setPassword(KeyboardInputs.stringInput("Enter your password."));
 
 	}
 	public static void showScreen_SignIn_Correct(){
@@ -209,7 +209,7 @@ public class UserInterfaceManager {
 	//
 	////////////////////
 	public static boolean showScreen_SignOut(){
-		return Input.yes("Are You sure, you want to sign out?(y/n)");
+		return KeyboardInputs.yes("Are You sure, you want to sign out?(y/n)");
 	}
 	public static void showScreen_SignOut_Correct(){
 		System.out.println("You are signed out!\n Good Bye!\n");
@@ -228,10 +228,10 @@ public class UserInterfaceManager {
 	////////////////////
 	public static void showScreen_SignUp(){
 		UserIdentificationRequest uir = new UserIdentificationRequest();
-		uir.setUsername(Input.stringInput("Enter your username here:"));
-		String tempSavePassword = Input.stringInput("Enter your password here:");
+		uir.setUsername(KeyboardInputs.stringInput("Enter your username here:"));
+		String tempSavePassword = KeyboardInputs.stringInput("Enter your password here:");
 		
-		if(tempSavePassword.equals(Input.stringInput("Enter your password again here:"))){
+		if(tempSavePassword.equals(KeyboardInputs.stringInput("Enter your password again here:"))){
 			uir.setPassword(tempSavePassword);
 			LogicManager.signUp(uir);
 			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_CORRECT);
@@ -256,8 +256,8 @@ public class UserInterfaceManager {
 	////////////////////
 	public static void showScreen_NewMessage(){
 		Message message = new Message();
-		message.setTitle(Input.stringInput("Enter your Title:"));
-		message.setBody(Input.stringInput("Enter your text:"));
+		message.setTitle(KeyboardInputs.stringInput("Enter your Title:"));
+		message.setBody(KeyboardInputs.stringInput("Enter your text:"));
 		message.setDate(new Date());
 		LogicManager.addNewMessage(message);
 	}

@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @author Rutger van Velzen, Ron Sanders and Marcel Groothuis
  *
  */
-public class Input {
+public class KeyboardInputs {
 	private static Scanner myscanner = new Scanner(System.in);
 	static String stringInput(){
 		String input = myscanner.nextLine();
@@ -52,7 +52,7 @@ public class Input {
 	}
 	static boolean yes(String printQuestions){
 		System.out.println(printQuestions);
-		char input = Input.charInput();
+		char input = KeyboardInputs.charInput();
 		
 		if(input ==	'y'){
 			return true;
