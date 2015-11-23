@@ -1,0 +1,67 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server versie:                5.6.27-log - MySQL Community Server (GPL)
+-- Server OS:                    Win64
+-- HeidiSQL Versie:              9.3.0.4984
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+-- Databasestructuur van blog wordt geschreven
+CREATE DATABASE IF NOT EXISTS `blog` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `blog`;
+
+
+-- Structuur van  tabel blog.messages wordt geschreven
+CREATE TABLE IF NOT EXISTS `messages` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL DEFAULT '0',
+  `body` varchar(255) NOT NULL DEFAULT '0',
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `userID` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`),
+  KEY `userID` (`userID`),
+  CONSTRAINT `user_messages` FOREIGN KEY (`userID`) REFERENCES `users` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- Dumpen data van tabel blog.messages: ~0 rows (ongeveer)
+/*!40000 ALTER TABLE `messages` DISABLE KEYS */;
+INSERT INTO `messages` (`ID`, `title`, `body`, `date`, `userID`) VALUES
+	(1, 'lal', 'land', '2015-11-17 14:36:38', 2);
+/*!40000 ALTER TABLE `messages` ENABLE KEYS */;
+
+
+-- Structuur van  tabel blog.users wordt geschreven
+CREATE TABLE IF NOT EXISTS `users` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL DEFAULT '0',
+  `password` varchar(255) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+
+-- Dumpen data van tabel blog.users: ~16 rows (ongeveer)
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`ID`, `username`, `password`) VALUES
+	(2, 'Ronnie', 'Flex'),
+	(14, '', ''),
+	(15, 'M', 'L'),
+	(16, 'M', 'L'),
+	(17, 'r', 'r'),
+	(18, 'M', 'L'),
+	(19, 'K', 'L'),
+	(20, 'p', 'p'),
+	(21, '2', '2'),
+	(22, '2', '2'),
+	(23, 'Ron', 'ron1'),
+	(24, 'ik', 'ik'),
+	(25, '3', '4'),
+	(26, 'pl', 'pl'),
+	(27, '23', '23'),
+	(28, '2', '2');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
