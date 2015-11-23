@@ -25,6 +25,7 @@ public class KeyboardInputs {
 		try{
 			return Integer.parseInt(input);
 		}catch(Exception ex) {
+			ex.printStackTrace();
 			return intInput();
 		}
 	}
@@ -34,6 +35,7 @@ public class KeyboardInputs {
 		try{
 			return Integer.parseInt(input);
 		}catch(Exception ex) {
+			ex.printStackTrace();
 			return intInput(printQuestions);
 		}
 	}
