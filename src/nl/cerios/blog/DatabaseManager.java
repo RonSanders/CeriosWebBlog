@@ -9,6 +9,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+import com.sun.xml.internal.bind.v2.TODO;
+
 import nl.cerios.blog.model.Message;
 import nl.cerios.blog.model.User;
 import nl.cerios.blog.model.UserIdentificationRequest;
@@ -37,13 +40,18 @@ public class DatabaseManager {
 		return getUser(newUser);
 	}
 
+	/**
+	 * This method loads the properties file, reads it and establishes a connection with the database.
+	 * @return driver connection
+	 * @throws FileNotFoundException
+	 * @throws Exception
+	 */
 	public static Connection connectionDatabase() throws FileNotFoundException, Exception{
-		//1. Load the propeties file
+		
 		Properties props = new Properties();
 		props.load(new FileInputStream("./config.properties.txt"));
 		String driver = "com.mysql.jdbc.Driver";
-		
-		//2. Read the props
+				
 		String theUser = props.getProperty("user");
 		String thePassword = props.getProperty("password");
 		String theDburl = props.getProperty("dburl");
@@ -51,25 +59,29 @@ public class DatabaseManager {
 		System.out.println("Connecting to database...");
 		System.out.println("Database URL: " + theDburl);
 		System.out.println("User: " + theUser);
-		
-		//3. Get a connection to database
+				
 		Class.forName(driver);
 		Connection con = DriverManager.getConnection(theDburl, theUser, thePassword);
 		System.out.println("\nConnection successfull!\n");	
 		return con;
 	}
 	
+	/**
+	 * @param uir
+	 * @return User
+	 * @throws Exception
+	 * @TODO refractor while-loop when "where"-statement is working for querying database
+	 */
 	public static User getUser(UserIdentificationRequest uir) throws Exception {
 		try {
 			Connection con = connectionDatabase();
-			//where SQL commando 
-			//Query
+			
 			PreparedStatement statement = con.prepareStatement("SELECT username,password FROM users"); 
 			ResultSet result = statement.executeQuery();
 			
 			User u = new User();
 			
-			while (result.next()) { //niet meer nodig omdat je er 1 selecteert
+			while (result.next()) { 
 				String dbUsername = result.getString("username");
 				String dbPassword = result.getString("password");
 				System.out.print(dbUsername + " " + dbPassword);
