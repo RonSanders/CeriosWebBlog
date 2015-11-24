@@ -1,3 +1,3 @@
 # CeriosWebBlog
 
-Welkom on the CeriosWebBlog git repository.
+Welcome on the CeriosWebBlog git repository.
