@@ -1,2 +1,3 @@
 # CeriosWebBlog
-Education
+
+Welkom on the CeriosWebBlog git repository.
