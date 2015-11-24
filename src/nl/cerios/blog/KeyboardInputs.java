@@ -17,18 +17,9 @@ public class KeyboardInputs {
 	static String stringInput(String printQuestions){
 		System.out.println(printQuestions);
 		String input = myscanner.nextLine();
-
 		return input;
 	}
-	static int intInput(){
-		String input = myscanner.nextLine();
-		try{
-			return Integer.parseInt(input);
-		}catch(Exception ex) {
-			ex.printStackTrace();
-			return intInput();
-		}
-	}
+
 	static int intInput(String printQuestions){
 		System.out.println(printQuestions);
 		String input = myscanner.nextLine();

@@ -18,36 +18,10 @@ import nl.cerios.blog.model.UserIdentificationRequest;
  * @since	01-11-2015
  */
 
-/*/////////////////// To Do ////////////////////
-//
-//	-Maybe Correct and not-correct should be 
-//		an status enum, that adds to the
-//		current screen enum (think about it
-//		as a sub screen).
-//	
-//	-Other option, add a value to the enum
-//		that indicates the status.
-//
-//	-Guest should be the same as a normal
-//		user but restricted if no one is 
-//		logged in.
-//
-//	-Work out a select post by title option
-//		show the actor a list of titles not
-//		the whole content of all the messages
-//
-//	-Make a surge option to find posts by
-//		an input string matching a (part of a)
-//		title.
-//
-//	-Order the read posts list buy date.
-//
-//	-Show the user an option to show all titles
-//		up to a certain date. Think of :
-//		"today, this week, this month"
-//
-/////////////////////////////////////////////*/
 public class UserInterfaceManager {
+	/**
+	 * @TODO Other option, add a value to the enum that indicates the status.
+	 */
 	public static void main(String[] args) {
 		UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
 	}
@@ -75,9 +49,9 @@ public class UserInterfaceManager {
 	public static void switchCurrentScreen(CurrentScreen currentScreen){
 		UserInterfaceManager.currentScreen = currentScreen;
 	
-		CurrentScreen keuze= getCurrentScreen();
+		CurrentScreen choice= getCurrentScreen();
 	
-		switch(keuze){
+		switch(choice){
 			case SHOW_SCREEN_WELCOME :
 				showScreen_Welcome();
 				break;
@@ -128,6 +102,11 @@ public class UserInterfaceManager {
 				showScreen_Welcome();
 		}
 	}
+	/**
+	 * This method shows the welcome screen to the user.
+	 * @TODO Show the user an option to show all titles up to a certain date. 
+	 * Think of: "today, this week, this month"
+	 */
 	public static void showScreen_Welcome(){
 		int index = KeyboardInputs.intInput(
 				"Welcome to Cerios blog!\n"+
@@ -149,7 +128,7 @@ public class UserInterfaceManager {
 		String name = LogicManager.getCurrentLoggedinUserName();
 		int index = KeyboardInputs.intInput(
 				"Welcome "+name+"!\n"+ 
-				"1) Do you want to write a new post?\n"+
+				"1) Do you want to write a new post?\n"+  
 				"2) Do you want to read the blog posts?\n"+
 				"3) Do you want to signout?\n");
 		switch(index){
@@ -166,7 +145,10 @@ public class UserInterfaceManager {
 			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
 		}
 	}
-	public static void showScreen_Guest(){ // must be one with showScreen_BlogNavigation, contend based on current user == null?
+	/**
+	 * @TODO Guest should be the same as a normal user, but restricted if no one is logged in.
+	 */
+	public static void showScreen_Guest(){ 
 		int index = KeyboardInputs.intInput(
 				"Welkom Guest\n"+
 				"1) Do you want to read all posts?\n"+
@@ -183,11 +165,11 @@ public class UserInterfaceManager {
 		}
 	}
 	
-	////////////////////
-	//
-	//		Sign in
-	//
-	////////////////////
+	/**
+	 * This method is used for signing in.
+	 * @TODO Maybe Correct and not-correct should be an status enum, that adds 
+	 * to the current screen enum (think about it as a sub screen).
+	 */
 	public static void showScreen_SignIn(){
 		UserIdentificationRequest uir = new UserIdentificationRequest();
 		uir.setUsername(KeyboardInputs.stringInput("Enter your userName."));
@@ -203,11 +185,14 @@ public class UserInterfaceManager {
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
 	}
 	
-	////////////////////
-	//
-	//		Sign out
-	//
-	////////////////////
+	
+	/**
+	 * This method is used for signing out.
+	 * @return
+	 * @TODO Maybe Correct and not-correct should be an status enum, that adds 
+	 * to the current screen enum (think about it as a sub screen).
+	 *  	
+	 */
 	public static boolean showScreen_SignOut(){
 		return KeyboardInputs.yes("Are You sure, you want to sign out?(y/n)");
 	}
@@ -215,17 +200,16 @@ public class UserInterfaceManager {
 		System.out.println("You are signed out!\n Good Bye!\n");
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
 	}
-	//showScreen_SignOut_NotCorrect
+	
 	public static void showScreen_SignOut_NotCorrect(){
 		System.out.println("Oops!\n We cant sign you out right now.\n");
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
 	}
 	
-	////////////////////
-	//
-	//		Sign up
-	//
-	////////////////////
+	
+	/**
+	 * This method is used for signing up.
+	 */
 	public static void showScreen_SignUp(){
 		UserIdentificationRequest uir = new UserIdentificationRequest();
 		uir.setUsername(KeyboardInputs.stringInput("Enter your username here:"));
@@ -249,11 +233,10 @@ public class UserInterfaceManager {
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
 	}
 	
-	////////////////////
-	//
-	//		post
-	//
-	////////////////////
+	
+	/**
+	 * This method is used for posting new messages.
+	 */
 	public static void showScreen_NewMessage(){
 		Message message = new Message();
 		message.setTitle(KeyboardInputs.stringInput("Enter your Title:"));
@@ -261,6 +244,12 @@ public class UserInterfaceManager {
 		message.setDate(new Date());
 		LogicManager.addNewMessage(message);
 	}
+	
+	/**
+	 * This method is used for reading/showing all blog posts.
+	 * @TODO Order the read posts list by date.
+	 * @TODO Make a surge option to find posts by an input string matching a (part of a) title.
+	 */
 	public static void showScreen_ShowMessages(){
 		List<Message> messages = LogicManager.getAllMessages();
 		for (Message message : messages) {
