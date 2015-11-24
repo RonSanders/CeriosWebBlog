@@ -18,33 +18,10 @@ import nl.cerios.blog.model.UserIdentificationRequest;
  * @since	01-11-2015
  */
 
-/*/////////////////// To Do ////////////////////
-//
-//	
-//	
-//	-Other option, add a value to the enum
-//		that indicates the status.
-//
-//	-Guest should be the same as a normal
-//		user but restricted if no one is 
-//		logged in.
-//
-//	-Work out a select post by title option
-//		show the actor a list of titles not
-//		the whole content of all the messages
-//
-//	-Make a surge option to find posts by
-//		an input string matching a (part of a)
-//		title.
-//
-//	-Order the read posts list buy date.
-//
-//	-Show the user an option to show all titles
-//		up to a certain date. Think of :
-//		"today, this week, this month"
-//
-/////////////////////////////////////////////*/
 public class UserInterfaceManager {
+	/**
+	 * @TODO Other option, add a value to the enum that indicates the status.
+	 */
 	public static void main(String[] args) {
 		UserInterfaceManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
 	}
@@ -125,6 +102,11 @@ public class UserInterfaceManager {
 				showScreen_Welcome();
 		}
 	}
+	/**
+	 * This method shows the welcome screen to the user.
+	 * @TODO Show the user an option to show all titles up to a certain date. 
+	 * Think of: "today, this week, this month"
+	 */
 	public static void showScreen_Welcome(){
 		int index = KeyboardInputs.intInput(
 				"Welcome to Cerios blog!\n"+
@@ -163,6 +145,9 @@ public class UserInterfaceManager {
 			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
 		}
 	}
+	/**
+	 * @TODO Guest should be the same as a normal user, but restricted if no one is logged in.
+	 */
 	public static void showScreen_Guest(){ 
 		int index = KeyboardInputs.intInput(
 				"Welkom Guest\n"+
@@ -262,6 +247,8 @@ public class UserInterfaceManager {
 	
 	/**
 	 * This method is used for reading/showing all blog posts.
+	 * @TODO Order the read posts list by date.
+	 * @TODO Make a surge option to find posts by an input string matching a (part of a) title.
 	 */
 	public static void showScreen_ShowMessages(){
 		List<Message> messages = LogicManager.getAllMessages();
