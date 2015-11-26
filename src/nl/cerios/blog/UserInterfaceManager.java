@@ -1,7 +1,6 @@
 package nl.cerios.blog;
 import java.util.Date;
 import java.util.List;
-import jdk.nashorn.internal.ir.CatchNode;
 import nl.cerios.blog.model.Message;
 import nl.cerios.blog.model.UserIdentificationRequest;
 
