@@ -20,7 +20,6 @@ import nl.cerios.blog.model.UserIdentificationRequest;
 /**
  * @author Rutger van Velzen, Ron Sanders and Marcel Groothuis
  *
- *         INSERT > https://www.youtube.com/watch?v=0EZlo8hForo
  */
 
 public class DatabaseManager {
@@ -70,7 +69,7 @@ public class DatabaseManager {
 	 * @param uir
 	 * @return User
 	 * @throws Exception
-	 * @TODO refractor while-loop when "where"-statement is working for querying database
+	 * @TODO Refactor while-loop when "where"-statement is working for querying database
 	 */
 	public static User getUser(UserIdentificationRequest uir) throws Exception {
 		try {
