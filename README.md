@@ -13,5 +13,5 @@ This README information is only here to get experience with documentation.
 
 <h4>To Do.</h4>
 <ul>
-<li>Ass items to the To-Do list.</li>
+<li>Add items to the To-Do list.</li>
 </ul>
