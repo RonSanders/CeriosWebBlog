@@ -19,7 +19,11 @@ public class KeyboardManager {
 		String input = myscanner.nextLine();
 		return input;
 	}
+<<<<<<< HEAD:src/nl/cerios/blog/KeyboardManager.java
 
+=======
+	
+>>>>>>> b71bd88e215b1af363d0c3c7a1777c8590602ec8:src/nl/cerios/blog/KeyboardInputs.java
 	static int intInput(){
 		String input = myscanner.nextLine();
 		try{
