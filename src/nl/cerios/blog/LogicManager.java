@@ -25,9 +25,12 @@ public class LogicManager {
 	/**
 	 * 
 	 * @param uir
+	 * @return 
+	 * @throws Exception 
 	 */
-	public static void signIn(UserIdentificationRequest uir){
-		Debug.log(currentLoggedinUser.getUsername());
+	public static User signIn(UserIdentificationRequest uir) throws Exception{
+		return DatabaseManager.getUser(uir);
+		//Debug.log(currentLoggedinUser.getUsername());
 	}
 	/**
 	 * 
