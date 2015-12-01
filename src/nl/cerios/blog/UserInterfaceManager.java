@@ -171,7 +171,7 @@ public class UserInterfaceManager {
 	 */
 	public static void showScreen_SignIn(){
 		UserIdentificationRequest uir = new UserIdentificationRequest();
-		uir.setUsername(KeyboardInputs.stringInput("Enter your userName."));
+		uir.setUsername(KeyboardInputs.stringInput("Enter your username."));
 		uir.setPassword(KeyboardInputs.stringInput("Enter your password."));
 
 	}

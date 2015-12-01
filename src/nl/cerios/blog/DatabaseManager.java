@@ -23,21 +23,8 @@ import nl.cerios.blog.model.UserIdentificationRequest;
 
 public class DatabaseManager {
 	Connection con = null;
-	public static User addUser(UserIdentificationRequest newUser) throws Exception { 
-
-		try {
-			Connection con = connectionDatabase();
-			PreparedStatement posted = con.prepareStatement("INSERT INTO users (username, password) VALUES " + "('"
-					+ newUser.getUsername() + "'," + "'" + newUser.getPassword() + "')");
-			posted.executeUpdate(); 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			System.out.println("Insert Completed.");
-		}
-		return getUser(newUser);
-	}
-
+	static PreparedStatement databaseStatement = null;
+	
 	/**
 	 * This method loads the properties file, reads it and establishes a connection with the database.
 	 * @return driver connection
@@ -65,6 +52,42 @@ public class DatabaseManager {
 	}
 	
 	/**
+	 * This method adds a new user to the MySQL database.
+	 * @param uir
+	 * @return User
+	 * @throws Exception
+	 * @TODO Refactor while-loop when "where"-statement is working for querying database
+	 */
+	
+	public static User addUser(UserIdentificationRequest uir) throws Exception { 
+
+		try {
+			//1. Get a connection
+			Connection con = connectionDatabase();
+			
+			//2.Prepared statement						
+			databaseStatement = con.prepareStatement("INSERT INTO users (username,password) values (?,?);");
+			
+			//PreparedStatement posted = con.prepareStatement("INSERT INTO users (username, password) VALUES " + "('"
+			//		+ uir.getUsername() + "'," + "'" + uir.getPassword() + "')");
+			
+			//3. Set the parameters
+			databaseStatement.setString(1, uir.getUsername());
+			databaseStatement.setString(2, uir.getPassword());
+			
+			//4. Execute SQL query
+			databaseStatement.executeUpdate(); 		
+			return getUser(uir);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("Insert Completed.");
+		}
+		return getUser(uir);
+	}
+	
+	/**
 	 * @param uir
 	 * @return User
 	 * @throws Exception
@@ -72,11 +95,21 @@ public class DatabaseManager {
 	 */
 	public static User getUser(UserIdentificationRequest uir) throws Exception {
 		try {
+			//1. Get a connection
 			Connection con = connectionDatabase();
 			
-			PreparedStatement statement = con.prepareStatement("SELECT username,password FROM users"); 
-			ResultSet result = statement.executeQuery();
+			//2.Prepared statement
+			databaseStatement = con.prepareStatement("SELECT * FROM users where username = ? and password = ?");
+			//PreparedStatement statement = con.prepareStatement("SELECT username,password FROM users"); 
 			
+			//3. Set the parameters
+			databaseStatement.setString(1, uir.getUsername());
+			databaseStatement.setString(2, uir.getPassword());
+			
+			//4. Execute SQL query
+			ResultSet result = databaseStatement.executeQuery();
+			
+			//5. Display the result set
 			User u = new User();
 			
 			while (result.next()) { 
@@ -96,13 +129,33 @@ public class DatabaseManager {
 			return null;
 		}
 	}
+	
+	/**
+	 * @param message
+	 * @throws Exception
+	 * @TODO Refactor foreign key problem in the database
+	 */
 	public static void newMessage(Message message) throws Exception { 
 		try {
+			//1. Get a connection
 			Connection con = connectionDatabase();
-			PreparedStatement posted = con
-					.prepareStatement("INSERT INTO messages (title, body) VALUES " + "('" + message.getTitle()
-							+ "'," + "'" + message.getBody() + "')");
-			posted.executeUpdate(); 
+			
+			//2.Prepared statement						
+			databaseStatement = con.prepareStatement("INSERT INTO messages (title,body) values (?,?);");
+			
+			//PreparedStatement posted = con
+			//		.prepareStatement("INSERT INTO messages (title, body) VALUES " + "('" + message.getTitle()
+			//				+ "'," + "'" + message.getBody() + "')");
+			
+			//3. Set the parameters
+			databaseStatement.setString(1, message.getTitle());
+			databaseStatement.setString(2, message.getBody());
+			
+			//4. Execute SQL query
+			databaseStatement.executeUpdate(); 		
+			
+			//posted.executeUpdate(); 
+			
 		} catch (Exception e) {
 			System.out.println("DBM > message(Insert): ");
 			e.printStackTrace();
