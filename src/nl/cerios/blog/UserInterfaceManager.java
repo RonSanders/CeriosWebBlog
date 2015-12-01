@@ -1,5 +1,5 @@
 package nl.cerios.blog;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import nl.cerios.blog.model.Message;
 import nl.cerios.blog.model.UserIdentificationRequest;
@@ -170,15 +170,9 @@ public class UserInterfaceManager {
 	 * to the current screen enum (think about it as a sub screen).
 	 */
 	public static void showScreen_SignIn(){
-<<<<<<< HEAD
 		UserIdentificationRequest uir = new UserIdentificationRequest();
-		uir.setUsername(KeyboardInputs.stringInput("Enter your username."));
+		uir.setUsername(KeyboardInputs.stringInput("Enter your userName."));
 		uir.setPassword(KeyboardInputs.stringInput("Enter your password."));
-=======
-		String tempSaveUsername = KeyboardInputs.stringInput("Enter your userName.");
-		String tempSavePassword = KeyboardInputs.stringInput("Enter your password.");
-		UserIdentificationRequest uir = new UserIdentificationRequest(tempSaveUsername, tempSavePassword);
->>>>>>> 018ab1ad6100ef1a56ae66f098a84a7c48a37ead
 
 	}
 	public static void showScreen_SignIn_Correct(){
@@ -216,12 +210,12 @@ public class UserInterfaceManager {
 	 * This method is used for signing up.
 	 */
 	public static void showScreen_SignUp(){
-		
-		String tempSaveUsername = KeyboardInputs.stringInput("Enter your username here:");
+		UserIdentificationRequest uir = new UserIdentificationRequest();
+		uir.setUsername(KeyboardInputs.stringInput("Enter your username here:"));
 		String tempSavePassword = KeyboardInputs.stringInput("Enter your password here:");
 		
 		if(tempSavePassword.equals(KeyboardInputs.stringInput("Enter your password again here:"))){
-			UserIdentificationRequest uir = new UserIdentificationRequest(tempSaveUsername, tempSavePassword);
+			uir.setPassword(tempSavePassword);
 			LogicManager.signUp(uir);
 			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_CORRECT);
 		}else{
@@ -246,7 +240,7 @@ public class UserInterfaceManager {
 		Message message = new Message();
 		message.setTitle(KeyboardInputs.stringInput("Enter your Title:"));
 		message.setBody(KeyboardInputs.stringInput("Enter your text:"));
-		message.setDate(new Date());
+		message.setDate(new Date(0));
 		LogicManager.addNewMessage(message);
 	}
 	

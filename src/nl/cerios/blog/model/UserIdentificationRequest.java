@@ -1,17 +1,19 @@
 package nl.cerios.blog.model;
 
-public final class UserIdentificationRequest {// rename to: UserIndentificationRequest ?
-	private String USERNAME;
-	private String 	PASSWORD	;
-	public UserIdentificationRequest(String username, String password){
-		USERNAME = username;
-		PASSWORD = 	password;
-	}
+public class UserIdentificationRequest {// rename to: UserIndentificationRequest ?
+	private String username;
+	private String 	password;
 	
 	public String getUsername() {
-		return USERNAME;
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getPassword() {
-		return PASSWORD;
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }
