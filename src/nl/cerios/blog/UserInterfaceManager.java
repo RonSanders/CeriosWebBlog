@@ -171,9 +171,10 @@ public class UserInterfaceManager {
 	 */
 	public static void showScreen_SignIn(){
 		UserIdentificationRequest uir = new UserIdentificationRequest();
-		uir.setUsername(KeyboardInputs.stringInput("Enter your userName."));
+		uir.setUsername(KeyboardInputs.stringInput("Enter your username."));
 		uir.setPassword(KeyboardInputs.stringInput("Enter your password."));
-
+		LogicManager.signIn(uir);
+		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_CORRECT);
 	}
 	public static void showScreen_SignIn_Correct(){
 		System.out.println("You are signed in!");
@@ -192,8 +193,11 @@ public class UserInterfaceManager {
 	 * to the current screen enum (think about it as a sub screen).
 	 *  	
 	 */
-	public static boolean showScreen_SignOut(){
-		return KeyboardInputs.yes("Are You sure, you want to sign out?(y/n)");
+	public static void showScreen_SignOut(){
+		if(KeyboardInputs.yes("Are You sure, you want to sign out?(y/n)"))
+			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_OUT_CORRECT);
+		else
+			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_OUT_NOT_CORRECT);
 	}
 	public static void showScreen_SignOut_Correct(){
 		System.out.println("You are signed out!\n Good Bye!\n");

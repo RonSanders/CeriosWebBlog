@@ -1,6 +1,7 @@
 package nl.cerios.blog;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -93,6 +94,9 @@ public class DatabaseManager {
 	 * @TODO Refactor while-loop when "where"-statement is working for querying database
 	 */
 	public static User getUser(UserIdentificationRequest uir) throws Exception {
+		ResultSet result = null;
+		User user = null;
+		
 		try {
 			//1. Get a connection
 			Connection con = connectionDatabase();
@@ -106,29 +110,31 @@ public class DatabaseManager {
 			databaseStatement.setString(2, uir.getPassword());
 			
 			//4. Execute SQL query
-			ResultSet result = databaseStatement.executeQuery();
+			result = databaseStatement.executeQuery();
 			
 			//5. Display the result set
-			User u = new User();
 			
-			while (result.next()) { 
-				String dbUsername = result.getString("username");
-				String dbPassword = result.getString("password");
-				System.out.print(dbUsername + " " + dbPassword);
-				if(uir.getUsername().equals(dbUsername) && uir.getPassword().equals(dbPassword)){
-					u.setUsername(dbUsername);
-					return u;
-				}
+			while (result.next()){
+				String userName = result.getString("username");
+				int userID = result.getInt("ID");	
+				
+				user = new User();
+				user.setuserID(userID);
+				user.setUsername(userName);
+				
+				System.out.printf("%s, %d \n", userName, userID);
 			}
 			System.out.println("All records have been selected!");
-			return null;
+			return user;
 		} catch (Exception e) {
 			System.out.println("DBM > getUser(Select): ");
 			e.printStackTrace();
-			return null;
+			return user;
 		}
 	}
 	
+
+
 	/**
 	 * @param message
 	 * @throws Exception
@@ -153,7 +159,7 @@ public class DatabaseManager {
 			databaseStatement.setInt(4, message.getUserID());
 			
 			//4. Execute SQL query
-			databaseStatement.executeUpdate(); 		
+			databaseStatement.executeUpdate() ; 		
 			
 			//posted.executeUpdate(); 
 			

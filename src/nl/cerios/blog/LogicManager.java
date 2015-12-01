@@ -1,4 +1,5 @@
 package nl.cerios.blog;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import nl.cerios.blog.model.Message;
@@ -28,9 +29,31 @@ public class LogicManager {
 	 * @return 
 	 * @throws Exception 
 	 */
-	public static User signIn(UserIdentificationRequest uir) throws Exception{
-		return DatabaseManager.getUser(uir);
+	public static User signIn(UserIdentificationRequest uir){
+		/*User u = new User();
+		ResultSet result = null;
+		//DatabaseManager.getUser(uir);
+		
+		while (result.next()) { 
+			String dbUsername = result.getString("username");
+			String dbPassword = result.getString("password");
+			System.out.print(dbUsername + " " + dbPassword);
+			if(uir.getUsername().equals(dbUsername) && uir.getPassword().equals(dbPassword)){
+				u.setUsername(dbUsername);
+				return u;
+			}
+		
 		//Debug.log(currentLoggedinUser.getUsername());
+		}*/
+		User user= null;
+		try{
+			user = DatabaseManager.getUser(uir);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		currentLoggedinUser = user;
+		
+		return user;
 	}
 	/**
 	 * 
