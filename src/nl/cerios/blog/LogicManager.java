@@ -22,6 +22,7 @@ public class LogicManager {
 	public static String getCurrentLoggedinUserName() {
 		return currentLoggedinUser.getUsername();
 	}
+	
 	/**
 	 * 
 	 * @param uir
@@ -40,6 +41,7 @@ public class LogicManager {
 		
 		return user;
 	}
+	
 	/**
 	 * 
 	 * @param signOut
@@ -49,6 +51,7 @@ public class LogicManager {
 			currentLoggedinUser = null;
 		}
 	}
+	
 	/**
 	 * <p>This sends an <code>{@link nl.cerios.blog.model.UserIdentificationRequest} </code> object to the <code>{@link nl.cerios.blog.DatebaseManager}</code> 
 	 * and sets the class variable <code>{@link LogicManager#currentLoggedinUser}</code> to the User object return value.</p>
@@ -61,6 +64,7 @@ public class LogicManager {
 			e.printStackTrace();
 		}
 	}
+	
 	/**
 	 * 
 	 * @return
@@ -69,6 +73,7 @@ public class LogicManager {
 		List<Message> messages = new ArrayList<>();
 		return messages;
 	}
+	
 	/**
 	 * 
 	 * @param message

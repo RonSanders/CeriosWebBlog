@@ -1,5 +1,4 @@
 package nl.cerios.blog;
-
 import java.sql.Date;
 import java.util.List;
 import nl.cerios.blog.model.Message;
@@ -95,7 +94,7 @@ public class SwitchManager {
 	
 	/**
 	 * 
-	 *
+	 * SwitchMenu's
 	 */
 	public static void switchWelcome(){
 		int index = KeyboardManager.intInput();
@@ -141,11 +140,13 @@ public class SwitchManager {
 		}
 		
 	}
+	
 	/**
 	 * This method is used for signing in.
 	 * @TODO Maybe Correct and not-correct should be an status enum, that adds 
 	 * to the current screen enum (think about it as a sub screen).
 	 */
+	
 	public static void showScreen_SignIn(){
 		UserIdentificationRequest uir = new UserIdentificationRequest();
 		uir.setUsername(KeyboardManager.stringInput("Enter your username."));
@@ -161,6 +162,7 @@ public class SwitchManager {
 		System.out.println("You are NOT logged in!");
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
 	}
+	
 	/**
 	 * This method is used for signing out.
 	 * @return
@@ -183,6 +185,7 @@ public class SwitchManager {
 		System.out.println("Oops!\n We cant sign you out right now.\n");
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
 	}
+	
 	/**
 	 * This method is used for signing up.
 	 */

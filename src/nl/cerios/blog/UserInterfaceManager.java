@@ -12,7 +12,6 @@ package nl.cerios.blog;
  * @version 0.1.0
  * @since	01-11-2015
  */
-
 public class UserInterfaceManager {
 		
 	/**
