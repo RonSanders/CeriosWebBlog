@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @author Rutger van Velzen, Ron Sanders and Marcel Groothuis
  *
  */
-public class KeyboardInputs {
+public class KeyboardManager {
 	private static Scanner myscanner = new Scanner(System.in);
 	static String stringInput(){
 		String input = myscanner.nextLine();
@@ -20,6 +20,15 @@ public class KeyboardInputs {
 		return input;
 	}
 
+	static int intInput(){
+		String input = myscanner.nextLine();
+		try{
+			return Integer.parseInt(input);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return intInput();
+		}
+	}
 	static int intInput(String printQuestions){
 		System.out.println(printQuestions);
 		String input = myscanner.nextLine();
@@ -45,7 +54,7 @@ public class KeyboardInputs {
 	}
 	static boolean yes(String printQuestions){
 		System.out.println(printQuestions);
-		char input = KeyboardInputs.charInput();
+		char input = KeyboardManager.charInput();
 		
 		if(input ==	'y'){
 			return true;

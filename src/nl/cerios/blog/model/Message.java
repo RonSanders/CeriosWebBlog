@@ -9,7 +9,7 @@ public class Message {
 	private enum MessageStatus{
 		SHOW, HIDE, DELETED, ADDETED, BLOCKED, FLAGGED, BANNED
 	}
-	MessageStatus messageSatus;
+	MessageStatus messageStatus;
 	
 	public String getTitle() {
 		return title;
@@ -36,9 +36,9 @@ public class Message {
 		this.userID = userID;
 	}
 	public MessageStatus getMessageSatus() {
-		return messageSatus;
+		return messageStatus;
 	}
-	public void setMessageSatus(MessageStatus messageSatus) {
-		this.messageSatus = messageSatus;
+	public void setMessageSatus(MessageStatus messageStatus) {
+		this.messageStatus = messageStatus;
 	}
 }

@@ -1,10 +1,10 @@
 package nl.cerios.blog;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import nl.cerios.blog.model.Message;
 import nl.cerios.blog.model.User;
 import nl.cerios.blog.model.UserIdentificationRequest;
+
 /**
  * This is the logic layer, here is where most calculations are done.
  * @author Rutger van Velzen, Ron Sanders, Marcel groothuis
@@ -13,7 +13,7 @@ import nl.cerios.blog.model.UserIdentificationRequest;
  */
 public class LogicManager {
 	
-	private static User currentLoggedinUser;
+	static User currentLoggedinUser;
 	
 	/**
 	 * This returns the user name of the current logged in user.
@@ -22,7 +22,6 @@ public class LogicManager {
 	public static String getCurrentLoggedinUserName() {
 		return currentLoggedinUser.getUsername();
 	}
-	
 	/**
 	 * 
 	 * @param uir
@@ -30,22 +29,8 @@ public class LogicManager {
 	 * @throws Exception 
 	 */
 	public static User signIn(UserIdentificationRequest uir){
-		/*User u = new User();
-		ResultSet result = null;
-		//DatabaseManager.getUser(uir);
-		
-		while (result.next()) { 
-			String dbUsername = result.getString("username");
-			String dbPassword = result.getString("password");
-			System.out.print(dbUsername + " " + dbPassword);
-			if(uir.getUsername().equals(dbUsername) && uir.getPassword().equals(dbPassword)){
-				u.setUsername(dbUsername);
-				return u;
-			}
-		
-		//Debug.log(currentLoggedinUser.getUsername());
-		}*/
 		User user= null;
+		
 		try{
 			user = DatabaseManager.getUser(uir);
 		}catch(Exception e){

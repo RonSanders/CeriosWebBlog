@@ -1,26 +1,20 @@
 package nl.cerios.blog;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.sql.*;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
-
-import com.sun.xml.internal.bind.v2.TODO;
-
 import nl.cerios.blog.model.Message;
 import nl.cerios.blog.model.User;
 import nl.cerios.blog.model.UserIdentificationRequest;
-
 
 /**
  * @author Rutger van Velzen, Ron Sanders and Marcel Groothuis
  *
  */
-
 public class DatabaseManager {
 	Connection con = null;
 	static PreparedStatement databaseStatement = null;
@@ -58,7 +52,6 @@ public class DatabaseManager {
 	 * @throws Exception
 	 * @TODO Refactor while-loop when "where"-statement is working for querying database
 	 */
-	
 	public static User addUser(UserIdentificationRequest uir) throws Exception { 
 
 		try {
@@ -127,7 +120,7 @@ public class DatabaseManager {
 			System.out.println("All records have been selected!");
 			return user;
 		} catch (Exception e) {
-			System.out.println("DBM > getUser(Select): ");
+			System.out.println("DBM > getUser(Select): " + e);
 			e.printStackTrace();
 			return user;
 		}
@@ -146,7 +139,7 @@ public class DatabaseManager {
 			Connection con = connectionDatabase();
 			
 			//2.Prepared statement						
-			databaseStatement = con.prepareStatement("INSERT INTO messages (title,body,date,userID) values (?,?,?,?);");
+			databaseStatement = con.prepareStatement("INSERT INTO messages2 (title,body,date,userID) values (?,?,?,?);");
 			
 			//PreparedStatement posted = con
 			//		.prepareStatement("INSERT INTO messages (title, body) VALUES " + "('" + message.getTitle()
@@ -158,13 +151,14 @@ public class DatabaseManager {
 			databaseStatement.setDate(3, (Date) message.getDate());
 			databaseStatement.setInt(4, message.getUserID());
 			
+			
 			//4. Execute SQL query
 			databaseStatement.executeUpdate() ; 		
 			
 			//posted.executeUpdate(); 
 			
 		} catch (Exception e) {
-			System.out.println("DBM > message(Insert): ");
+			System.out.println("DBM > message(Insert): " + e);
 			e.printStackTrace();
 		} finally {
 			System.out.println("Insert Completed.");
