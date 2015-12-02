@@ -9,8 +9,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
-import nl.cerios.blog.SwitchManager.CurrentScreen;
 import nl.cerios.blog.model.Message;
 import nl.cerios.blog.model.User;
 import nl.cerios.blog.model.UserIdentificationRequest;
@@ -50,34 +48,33 @@ public class DatabaseManager {
 	}
 	
 	/**
-	 * This method adds a new user to the MySQL database.
+	 * This method checks if the user exists and if not adds a new user to the MySQL database.
 	 * @param uir
 	 * @return User
 	 * @throws Exception
 	 * @TODO Refactor while-loop when "where"-statement is working for querying database
 	 */
 	public static User addUser(UserIdentificationRequest uir) throws Exception { 
-
+		ResultSet result = null;
+		
 		try {
-			//1. Get a connection
 			Connection con = connectionDatabase();
+			databaseStatement = con.prepareStatement("SELECT * FROM users where username = ?");
+			databaseStatement.setString(1, uir.getUsername());
+			result = databaseStatement.executeQuery();
 			
-			//2.Prepared statement						
+			while (result.next()){
+				return null;
+			}			
 			databaseStatement = con.prepareStatement("INSERT INTO users (username,password) values (?,?);");
-			
-			//3. Set the parameters
 			databaseStatement.setString(1, uir.getUsername());
 			databaseStatement.setString(2, uir.getPassword());
-			
-			//4. Execute SQL query
 			databaseStatement.executeUpdate(); 		
 			return getUser(uir);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			System.out.println("Insert Completed.");
-		}
+		} 
 		return getUser(uir);
 	}
 	
@@ -92,21 +89,12 @@ public class DatabaseManager {
 		User user = null;
 		
 		try {
-			//1. Get a connection
 			Connection con = connectionDatabase();
-			
-			//2.Prepared statement
 			databaseStatement = con.prepareStatement("SELECT * FROM users where username = ? and password = ?");
-			//PreparedStatement statement = con.prepareStatement("SELECT username,password FROM users"); 
-			
-			//3. Set the parameters
 			databaseStatement.setString(1, uir.getUsername());
 			databaseStatement.setString(2, uir.getPassword());
-			
-			//4. Execute SQL query
 			result = databaseStatement.executeQuery();
-			
-			//5. Display the result set
+
 			while (result.next()){
 				String userName = result.getString("username");
 				int userID = result.getInt("ID");	
@@ -114,10 +102,7 @@ public class DatabaseManager {
 				user = new User();
 				user.setuserID(userID);
 				user.setUsername(userName);
-				
-				System.out.printf("%s, %d \n", userName, userID);
 			}
-			System.out.println("All records have been selected!");
 			return user;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -125,8 +110,6 @@ public class DatabaseManager {
 		}
 	}
 	
-
-
 	/**
 	 * @param message
 	 * @throws Exception
@@ -134,27 +117,16 @@ public class DatabaseManager {
 	 */
 	public static void newMessage(Message message) throws Exception { 
 		try {
-			//1. Get a connection
-			Connection con = connectionDatabase();
-			
-			//2.Prepared statement						
+			Connection con = connectionDatabase();				
 			databaseStatement = con.prepareStatement("INSERT INTO messages (title,body,date,userID) values (?,?,?,?);");
-				
-			//3. Set the parameters
 			databaseStatement.setString(1, message.getTitle());
 			databaseStatement.setString(2, message.getBody());
 			databaseStatement.setDate(3, (Date) message.getDate());
 			databaseStatement.setInt(4, message.getUserID());
-			
-			//4. Execute SQL query
 			databaseStatement.executeUpdate() ; 		
-			
-			System.out.println("Insert Completed.");
-			
+			System.out.println("Insert Completed. \n");
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			SwitchManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
 		}
 	}
 	
@@ -169,16 +141,10 @@ public class DatabaseManager {
 		List<Message> messages = new ArrayList<Message>();
 		
 		try {
-			//1. Get a connection
 			Connection con = connectionDatabase();
-			
-			//2.Prepared statement
 			databaseStatement = con.prepareStatement("SELECT * FROM messages");
-							
-			//4. Execute SQL query
 			result = databaseStatement.executeQuery();
-			
-			//5. Display the result set
+
 			while (result.next()){
 				Message message = new Message();
 				

@@ -1,5 +1,5 @@
 package nl.cerios.blog;
-import java.util.ArrayList;
+
 import java.util.List;
 import nl.cerios.blog.model.Message;
 import nl.cerios.blog.model.User;

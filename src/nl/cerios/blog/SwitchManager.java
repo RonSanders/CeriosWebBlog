@@ -146,11 +146,10 @@ public class SwitchManager {
 	 * @TODO Maybe Correct and not-correct should be an status enum, that adds 
 	 * to the current screen enum (think about it as a sub screen).
 	 */
-	
 	public static void showScreen_SignIn(){
 		UserIdentificationRequest uir = new UserIdentificationRequest();
-		uir.setUsername(KeyboardManager.stringInput("Enter your username."));
-		uir.setPassword(KeyboardManager.stringInput("Enter your password."));
+		uir.setUsername(KeyboardManager.stringInput("Enter your username: "));
+		uir.setPassword(KeyboardManager.stringInput("Enter your password: "));
 		LogicManager.signIn(uir);
 		if (LogicManager.currentLoggedinUser != null)
 			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_CORRECT);
@@ -200,7 +199,10 @@ public class SwitchManager {
 		if(tempSavePassword.equals(KeyboardManager.stringInput("Enter your password again here:"))){
 			uir.setPassword(tempSavePassword);
 			LogicManager.signUp(uir);
-			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_CORRECT);
+			if (LogicManager.currentLoggedinUser != null)
+				switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_CORRECT);
+			else
+				switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_NOT_CORRECT);
 		}else{
 			System.out.println("Your password did not match!");
 			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_NOT_CORRECT);
@@ -211,7 +213,9 @@ public class SwitchManager {
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
 	}
 	public static void showScreen_SignUp_NotCorrect(){
-		System.out.println("Oops!\n We cant sign you up right now.\n");
+		System.out.println("Oops! \nWe can't sign you up right now! "
+				+ "\nCould be two things: user already exists in the database "
+				+ "or the first and second passwords do not match! \n");
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
 	}
 	
@@ -221,11 +225,12 @@ public class SwitchManager {
 	 */
 	public static void showScreen_NewMessage(){
 		Message message = new Message();
-		message.setTitle(KeyboardManager.stringInput("Enter your Title:"));
-		message.setBody(KeyboardManager.stringInput("Enter your text:"));
+		message.setTitle(KeyboardManager.stringInput("Enter your title: "));
+		message.setBody(KeyboardManager.stringInput("Enter your message: "));
 		message.setUserID(LogicManager.currentLoggedinUser.getuserID());
 		message.setDate(new Date(0));
 		LogicManager.addNewMessage(message);
+		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
 	}
 	
 	/**
