@@ -24,8 +24,8 @@ public class KeyboardManager {
 		String input = myscanner.nextLine();
 		try{
 			return Integer.parseInt(input);
-		}catch(Exception ex) {
-			ex.printStackTrace();
+		}catch(Exception e) {
+			System.out.println("Wrong input! Enter a number!\n");
 			return intInput();
 		}
 	}
@@ -34,8 +34,8 @@ public class KeyboardManager {
 		String input = myscanner.nextLine();
 		try{
 			return Integer.parseInt(input);
-		}catch(Exception ex) {
-			ex.printStackTrace();
+		}catch(Exception e) {
+			e.printStackTrace();
 			return intInput(printQuestions);
 		}
 	}
