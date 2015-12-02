@@ -6,7 +6,11 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+
+import nl.cerios.blog.SwitchManager.CurrentScreen;
 import nl.cerios.blog.model.Message;
 import nl.cerios.blog.model.User;
 import nl.cerios.blog.model.UserIdentificationRequest;
@@ -61,9 +65,6 @@ public class DatabaseManager {
 			//2.Prepared statement						
 			databaseStatement = con.prepareStatement("INSERT INTO users (username,password) values (?,?);");
 			
-			//PreparedStatement posted = con.prepareStatement("INSERT INTO users (username, password) VALUES " + "('"
-			//		+ uir.getUsername() + "'," + "'" + uir.getPassword() + "')");
-			
 			//3. Set the parameters
 			databaseStatement.setString(1, uir.getUsername());
 			databaseStatement.setString(2, uir.getPassword());
@@ -106,7 +107,6 @@ public class DatabaseManager {
 			result = databaseStatement.executeQuery();
 			
 			//5. Display the result set
-			
 			while (result.next()){
 				String userName = result.getString("username");
 				int userID = result.getInt("ID");	
@@ -120,7 +120,6 @@ public class DatabaseManager {
 			System.out.println("All records have been selected!");
 			return user;
 		} catch (Exception e) {
-			System.out.println("DBM > getUser(Select): " + e);
 			e.printStackTrace();
 			return user;
 		}
@@ -140,11 +139,7 @@ public class DatabaseManager {
 			
 			//2.Prepared statement						
 			databaseStatement = con.prepareStatement("INSERT INTO messages (title,body,date,userID) values (?,?,?,?);");
-			
-			//PreparedStatement posted = con
-			//		.prepareStatement("INSERT INTO messages (title, body) VALUES " + "('" + message.getTitle()
-			//				+ "'," + "'" + message.getBody() + "')");
-			
+				
 			//3. Set the parameters
 			databaseStatement.setString(1, message.getTitle());
 			databaseStatement.setString(2, message.getBody());
@@ -154,13 +149,49 @@ public class DatabaseManager {
 			//4. Execute SQL query
 			databaseStatement.executeUpdate() ; 		
 			
-			//posted.executeUpdate(); 
+			System.out.println("Insert Completed.");
 			
 		} catch (Exception e) {
-			System.out.println("DBM > message(Insert): " + e);
 			e.printStackTrace();
 		} finally {
-			System.out.println("Insert Completed.");
+			SwitchManager.switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
+		}
+	}
+	
+	/**
+	 * @param uir
+	 * @return User
+	 * @throws Exception
+	 * @TODO Add setDate
+	 */
+	public static List<Message> getMessage(){
+		ResultSet result = null;
+		List<Message> messages = new ArrayList<Message>();
+		
+		try {
+			//1. Get a connection
+			Connection con = connectionDatabase();
+			
+			//2.Prepared statement
+			databaseStatement = con.prepareStatement("SELECT * FROM messages");
+							
+			//4. Execute SQL query
+			result = databaseStatement.executeQuery();
+			
+			//5. Display the result set
+			while (result.next()){
+				Message message = new Message();
+				
+				message.setTitle(result.getString("title"));
+				message.setBody(result.getString("body"));
+				
+				messages.add(message);
+			}
+			System.out.println("All messages have been selected!");
+			return messages;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return messages;
 		}
 	}
 }

@@ -152,7 +152,10 @@ public class SwitchManager {
 		uir.setUsername(KeyboardManager.stringInput("Enter your username."));
 		uir.setPassword(KeyboardManager.stringInput("Enter your password."));
 		LogicManager.signIn(uir);
-		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_CORRECT);
+		if (LogicManager.currentLoggedinUser != null)
+			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_CORRECT);
+		else
+			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_NOT_CORRECT);
 	}
 	public static void showScreen_SignIn_Correct(){
 		System.out.println("You are signed in!");
@@ -233,9 +236,9 @@ public class SwitchManager {
 	public static void showScreen_ShowMessages(){
 		List<Message> messages = LogicManager.getAllMessages();
 		for (Message message : messages) {
-			System.out.println(message.getTitle());
-			System.out.println(message.getBody());
-			System.out.println();
+			System.out.println("Title: " + message.getTitle() + "\n");
+			System.out.println("Message: " + message.getBody() + "\n");
+			System.out.println("—————————————————————————————————————————————————————————————");
 		}
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
 	}
