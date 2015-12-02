@@ -157,7 +157,7 @@ public class SwitchManager {
 			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_UP_NOT_CORRECT);
 	}
 	public static void showScreen_SignIn_Correct(){
-		System.out.println("You are signed in!");
+		Debug.log("You are signed in!");
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
 	}
 	public static void showScreen_SignIn_NotCorrect(){
@@ -179,7 +179,7 @@ public class SwitchManager {
 			switchCurrentScreen(CurrentScreen.SHOW_SCREEN_SIGN_OUT_NOT_CORRECT);
 	}
 	public static void showScreen_SignOut_Correct(){
-		System.out.println("You are signed out!\n Good Bye!\n");
+		Debug.log("You are signed out!\n Good Bye!\n");
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_WELCOME);
 	}
 	
@@ -209,7 +209,7 @@ public class SwitchManager {
 		}
 	}
 	public static void showScreen_SignUp_Correct(){
-		System.out.println("You are signed up!\n");
+		Debug.log("You are signed up!\n");
 		switchCurrentScreen(CurrentScreen.SHOW_SCREEN_BLOG_NAVIGATION);
 	}
 	public static void showScreen_SignUp_NotCorrect(){

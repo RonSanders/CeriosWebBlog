@@ -37,13 +37,13 @@ public class DatabaseManager {
 		String thePassword = props.getProperty("password");
 		String theDburl = props.getProperty("dburl");
 		
-		System.out.println("Connecting to database...");
-		System.out.println("Database URL: " + theDburl);
-		System.out.println("User: " + theUser);
+		Debug.log("Connecting to database...");
+		Debug.log("Database URL: " + theDburl);
+		Debug.log("User: " + theUser);
 				
 		Class.forName(driver);
 		Connection con = DriverManager.getConnection(theDburl, theUser, thePassword);
-		System.out.println("\nConnection successfull!\n");	
+		Debug.log("\nConnection successfull!\n");	
 		return con;
 	}
 	
@@ -153,7 +153,7 @@ public class DatabaseManager {
 				
 				messages.add(message);
 			}
-			System.out.println("All messages have been selected!");
+			Debug.log("All messages have been selected!");
 			return messages;
 		} catch (Exception e) {
 			e.printStackTrace();
