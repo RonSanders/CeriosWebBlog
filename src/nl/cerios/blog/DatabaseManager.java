@@ -124,7 +124,7 @@ public class DatabaseManager {
 			databaseStatement.setDate(3, (Date) message.getDate());
 			databaseStatement.setInt(4, message.getUserID());
 			databaseStatement.executeUpdate() ; 		
-			System.out.println("Insert Completed. \n");
+			System.out.println("Message saved in database! \n");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -147,10 +147,8 @@ public class DatabaseManager {
 
 			while (result.next()){
 				Message message = new Message();
-				
 				message.setTitle(result.getString("title"));
 				message.setBody(result.getString("body"));
-				
 				messages.add(message);
 			}
 			Debug.log("All messages have been selected!");
