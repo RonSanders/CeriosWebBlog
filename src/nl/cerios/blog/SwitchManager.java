@@ -220,6 +220,7 @@ public class SwitchManager {
 		Message message = new Message();
 		message.setTitle(KeyboardManager.stringInput("Enter your Title:"));
 		message.setBody(KeyboardManager.stringInput("Enter your text:"));
+		message.setUserID(LogicManager.currentLoggedinUser.getuserID());
 		message.setDate(new Date(0));
 		LogicManager.addNewMessage(message);
 	}

@@ -139,7 +139,7 @@ public class DatabaseManager {
 			Connection con = connectionDatabase();
 			
 			//2.Prepared statement						
-			databaseStatement = con.prepareStatement("INSERT INTO messages2 (title,body,date,userID) values (?,?,?,?);");
+			databaseStatement = con.prepareStatement("INSERT INTO messages (title,body,date,userID) values (?,?,?,?);");
 			
 			//PreparedStatement posted = con
 			//		.prepareStatement("INSERT INTO messages (title, body) VALUES " + "('" + message.getTitle()
@@ -150,7 +150,6 @@ public class DatabaseManager {
 			databaseStatement.setString(2, message.getBody());
 			databaseStatement.setDate(3, (Date) message.getDate());
 			databaseStatement.setInt(4, message.getUserID());
-			
 			
 			//4. Execute SQL query
 			databaseStatement.executeUpdate() ; 		
