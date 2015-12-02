@@ -38,7 +38,6 @@ public class LogicManager {
 			e.printStackTrace();
 		}
 		currentLoggedinUser = user;
-		
 		return user;
 	}
 	
@@ -70,7 +69,7 @@ public class LogicManager {
 	 * @return
 	 */
 	public static List<Message> getAllMessages(){
-		List<Message> messages = new ArrayList<>();
+		List<Message> messages = DatabaseManager.getMessage();
 		return messages;
 	}
 	
