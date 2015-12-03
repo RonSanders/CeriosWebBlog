@@ -8,7 +8,7 @@ package nl.cerios.blog;
  */
 
 public class Debug {
-	static boolean debugMode = true;
+	static boolean debugMode = false;
 
 	/**
 	 * This is for debugging only and will have no use in the final product

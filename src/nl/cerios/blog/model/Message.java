@@ -35,10 +35,10 @@ public class Message {
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
-	public MessageStatus getMessageSatus() {
+	public MessageStatus getMessageStatus() {
 		return messageStatus;
 	}
-	public void setMessageSatus(MessageStatus messageStatus) {
+	public void setMessageStatus(MessageStatus messageStatus) {
 		this.messageStatus = messageStatus;
 	}
 }
